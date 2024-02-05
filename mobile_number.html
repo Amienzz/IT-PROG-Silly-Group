@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body
+       {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 20px;
+       }
+
+        form 
+        {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label 
+        {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input 
+        {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="submit"] 
+        {
+            background-color: #5dd55d;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover 
+        {
+            background-color: #2aa22a;
+        }
+         a 
+        {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 10px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #5dd55d;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover 
+        {
+            background-color: #2aa22a;
+        }
+
+       /* button 
+        {
+            background-color: #28a745;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover 
+        {
+            background-color: #218838;
+        }*/
+    </style>
+</head>
+<body>
+    
+    <form action="mobile_process.jsp">
+    <label for="mobile">Mobile_Number:</label>
+    <input type="text" id="mobile" name="mobile" required pattern="[0-9]+" maxlength = 11 title="Please enter numbers only"><br>
+    <input type="submit" value="Submit">
+     <a href="mainpage.jsp">BACK</a><br>
+        
+  
+    </form>
+
+ 
+</body>
+</html>

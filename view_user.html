@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+         <style>
+            body 
+            {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                text-align: center;
+                margin: 50px;
+            }
+
+            form 
+            {
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            label 
+            {
+                display: block;
+                margin-bottom: 10px;
+            }
+
+            select, input[type="submit"] 
+            {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 15px;
+                box-sizing: border-box;
+            }
+
+            input[type="submit"] 
+            {
+                background-color: #5dd55d;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                cursor: pointer;
+                border-radius: 5px;
+                transition: background-color 0.3s;
+            }
+
+            input[type="submit"]:hover 
+            {
+                background-color: #2aa22a;
+            }
+
+            button 
+            {
+                background-color: #5dd55d;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin-top: 20px;
+                cursor: pointer;
+                border-radius: 5px;
+                transition: background-color 0.3s;
+            }
+
+            button:hover 
+            {
+                background-color: #2aa22a;
+            }
+        </style>
+    </head>
+    <body>
+        
+      <form action = "process_view.jsp">
+            <label for="gender">Gender: </label>
+            <select id="gender" name="gender">  
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                 <option value="Non-binary">Non-binary</option>
+                <option value="Prefer not to say">Prefer not to say</option> 
+            </select>
+            <br>
+            <input type="submit" value = "NEXT"> 
+      </form>
+      <form action="mainpage.jsp" method="post">
+            <button type="submit">Back</button>
+     </form>
+    </body>
+</html>

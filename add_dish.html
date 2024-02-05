@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+         body 
+        {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 50px;
+        }
+        form 
+        {
+            width: 300px;
+            margin: auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label 
+        {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input, select 
+        {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] 
+        {
+            background-color: #5dd55d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="submit"]:hover 
+        {
+            background-color: #2aa22a;
+        }
+    </style>
+    </head>
+    <body>
+        <form action="add_dish_process.jsp">
+        <label for="new_dish">Dish name:</label>
+        <input type="text" id="new_dish" name="new_dish" required><br>
+        
+        <label for="new_dish">Dish Price:</label>
+        <input type="text" id="dish_price" name="dish_price" required pattern="[0-9]+(\.[0-9]+)?" maxlength="11" title="Please enter numbers only (you can use decimals)">
+        <br>
+        
+        <label for="category">Category: </label>
+            <select id="category" name="category">
+                <option value="Soup">Soup</option>
+                <option value="Salad">Salad</option>
+                <option value="Main course">Main course</option> 
+                <option value="Pasta">Pasta</option> 
+                <option value="Sandwiches">Sandwiches</option> 
+                <option value="Sides">Sides</option> 
+                <option value="Dessert">Dessert</option> 
+                <option value="Special">Special</option> 
+            </select>
+        <br>
+        <input type="submit" value="Submit">
+        <a href="edit_dish.html">BACK</a><br>
+        
+  
+    </form>
+    </body>
+</html>

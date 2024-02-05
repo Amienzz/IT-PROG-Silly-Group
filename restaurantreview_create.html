@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Review the Restaurant</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            text-align: center;
+        }
+
+        div {
+            margin: 20px;
+        }
+
+        form {
+            display: inline-block;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #32a852;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type="button"] {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        
+        <form action="restaurantreview_create_processing.jsp">
+            
+            <label for="selectRating">Select the rating for the restaurant:</label>
+            <select id="rating" name="rating" required>
+                <option value="" selected disabled hidden>Select an option</option>
+                <option value="Excellent">Excellent</option>
+                <option value="Good">Good</option>
+                <option value="Average">Average</option>
+                <option value="Fair">Fair</option>
+                <option value="Poor">Poor</option>
+            </select><br>
+            Write a Review:<textarea id="review" name="review" rows="5" cols="60" required></textarea><br>
+            <button type="submit">Create</button>
+            <button type="button" onclick="history.back()">Back</button>
+        </form>
+    </div>
+</body>
+</html>

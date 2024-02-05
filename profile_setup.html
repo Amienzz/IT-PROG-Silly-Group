@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>profile_setup</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+        body 
+        {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 50px;
+        }
+
+        form 
+        {
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        label 
+        {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input 
+        {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] 
+        {
+            background-color: #5dd55d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover 
+        {
+            background-color: #2aa22a;
+        }
+    </style>
+        
+    </head>
+    <body>
+         <form action = "profile_process.jsp">
+            <label for="username">Username: </label><!-- comment -->
+            <input type="text" id="username" name="username" required> <br>
+            
+            <label for="bio">Bio: </label><!-- comment -->
+            <input type="text" id="bio" name="bio" required> <br>
+            
+            <input type="submit" value = "Finish Profile Set Up">
+        </form>
+    </body>
+</html>
