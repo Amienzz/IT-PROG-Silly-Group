@@ -7,7 +7,7 @@ meow meow meow meow meow meow meow meow meow meow meow
 Changelog 1.0 (As of 6:26 PM 05/02/2024)
 Added to the Repository are the following:
 - account.php
-- moobile.php
+- mobile.php
 - profile.php
 - user.php
 
@@ -27,3 +27,4 @@ Added to the Repository are the following:
 - restaurantview_search.php
 - restaurantview_reportphp
 - Changed Changelog 1.0's textlog to "Added to the Repository are the following:"
+- Changed typo of "moobile.php" in Changelog 1.0 to "mobile.php"
