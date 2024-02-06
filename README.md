@@ -28,3 +28,10 @@ Added to the Repository are the following:
 - restaurantview_reportphp
 - Changed Changelog 1.0's textlog to "Added to the Repository are the following:"
 - Changed typo of "moobile.php" in Changelog 1.0 to "mobile.php"
+
+Changelog 1.03 (As of 3:37PM  06/02/2024)
+Added to the Repository are the following:
+- BE_Dish.php
+- BE_Dish_Review.php
+- BE_restaurant.php
+- BE_RestaurantReviews.php
