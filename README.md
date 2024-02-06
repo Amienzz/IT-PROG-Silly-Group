@@ -35,3 +35,13 @@ Added to the Repository are the following:
 - BE_Dish_Review.php
 - BE_restaurant.php
 - BE_RestaurantReviews.php
+
+Changelog 1.04 (As of 3:44 PM 06/02/2024)
+Added to the Repository are the following:
+- creation_processing.php
+- security_process.php
+- profile_process.php
+- dishreview.php
+- input_review.php
+- viewresult_dishreview.php
+- search_reviews.php
