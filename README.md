@@ -45,3 +45,12 @@ Added to the Repository are the following:
 - input_review.php
 - viewresult_dishreview.php
 - search_reviews.php
+
+Changelog 1.05 (As of 1:24 PM 07/02/2024)
+Added to the Repository are the following:
+- add_dish_process.php
+- view_dish.php
+- search_dishes.php
+- delete_dish.php
+- deleteresult_dishreview.php
+- updateresult_dishreview.php
