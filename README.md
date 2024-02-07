@@ -54,3 +54,12 @@ Added to the Repository are the following:
 - delete_dish.php
 - deleteresult_dishreview.php
 - updateresult_dishreview.php
+
+Changelog 1.05b (As of 1:35 PM 07/02/2024)
+Added to the Repository are the following:
+- mobile_process.php
+- choose_moobile.php
+- new_username_process.php
+- new_bio_process.php
+- process_view.php
+- deactivate_process.php
