@@ -7,26 +7,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <ul class="taskbar">
-            <li>
-                <a href="www.youtube.com">
-                    YouTube
-                </a>
-            </li>
-            <li>Hello!</li>
-            <li>Goodbye!</li>
-        </ul>
-    </header>
+    <header class="taskbar"></header>
 
     <main>
-        <form action="login_verification.php">
+        <form class="textbox_border" action="login_verification.php">
+            <h3>Log in</h3>
+
             <div class="textbox">
-                <label for="email" style="margin-right: 10px;">Email:</label>
-                <input type="text" id="email" name="email" style="display: block; width: 100%;" required><br>
+                <label for="email">Email:</label>
+                <input type="text" class = "login_input" id="email" name="email" required>
                 
-                <label for="password" style="margin-right: 10px;">Password:</label>
-                <input type="password" id="password" name="password" style="display: block; width: 100%;" required><br>
+                <label for="password">Password:</label>
+                <input type="password" class = "login_input" id="password" name="password" required>
             </div>
                 
             <button type="submit">Login</button>

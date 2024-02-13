@@ -7,33 +7,44 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit thi
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <title>CREATE ACCOUNT</title>         
+        <title>CREATE ACCOUNT</title>
+        <link rel="stylesheet" href="style.css">
     </head>
-    <body>
-        <form action = "creation_processing.jsp">
-            <label for="firstname">First Name: </label><!-- comment -->
-            <input type="text" id="firstname" name="firstname" required> <br>
-            
-            <label for="middle_initial">Middle Initial: </label>
-            <input type="text" id="middle_initial" name="middle_initial" maxlength = "1" required> <br>
-            
-            <label for="last_name">Last Name: </label>
-            <input type="text" id="last_name" name="last_name" required> <br>
-            
-            <label for="birthday">Birthday: </label>
-            <input type="date" id="birthday" name="birthday" required> <br>
-            
-            <label for="gender">Gender: </label>
-            <select id="gender" name="gender">  
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                 <option value="Non-binary">Non-binary</option>
-                <option value="Prefer not to say">Prefer not to say</option> 
-            </select>
-            <br>
-            <input type="submit" value = "CREATE ACCOUNT">
-            
-        </form>
-        
+    <body> 
+        <header class="taskbar"></header>
+
+        <main>
+            <form class="textbox_border">
+                <h3>Create an account!</h3>
+
+                <div class="textbox">
+                    <label for="firstname">First Name: </label>
+                    <input type="text" class = "login_input" id="firstname" name="firstname" required>
+                    
+                    <label for="middle_initial">Middle Initial: </label>
+                    <input type="text" class = "login_input" id="middle_initial" name="middle_initial" maxlength = "1" required>
+                    
+                    <label for="last_name">Last Name: </label>
+                    <input type="text" class = "login_input" id="last_name" name="last_name" required>
+                    
+                    <label for="birthday">Birthday: </label>
+                    <input type="date" class = "login_input" id="birthday" name="birthday" style="width: 45%" required>
+                    
+                    <label for="gender">Gender: </label>
+                    <select id="gender" name="gender" class = "login_input" style="width: 45%;">  
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Non-binary">Non-binary</option>
+                        <option value="Prefer not to say">Prefer not to say</option> 
+                    </select>
+                </div>
+                
+                <button type="submit" action = "creation_processing.php">Create Account</button>
+            </form>
+
+            <form action="index.html">
+                <button type="submit" style="background-color: red;">Cancel</button>
+            </form>
+        </main>
     </body>
 </html>
