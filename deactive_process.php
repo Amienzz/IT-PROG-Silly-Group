@@ -16,22 +16,6 @@ $status = $P->deleteProfile();
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>JSP Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-            margin: 50px;
-        }
-
-        form {
-            display: inline-block;
-            padding: 20px;
-            border: 1px solid #ccc;
-            background-color: white;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-    </style>
 </head>
 <body>
 <?php

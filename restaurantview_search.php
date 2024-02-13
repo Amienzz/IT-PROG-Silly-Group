@@ -3,63 +3,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Search a review</title>
-    <style>
-        .hidden {
-            display: none;
-        }
-
-        body {
-            text-align: left;
-        }
-
-        h2 {
-            text-align: center;
-        }
-
-        h4 {
-            text-align: center;
-        }
-    </style>
-    <style>
-        form {
-            display: inline-block;
-            text-align: left;
-            margin: 20px;
-        }
-
-        p {
-            color: #666;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        select, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-            background-color: #f8f9fa; 
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #32a852; 
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button[type="button"] {
-            margin-right: 10px;
-        }
-    </style>
 </head>
 <body>
     <h2>Search for reviews</h2><br>

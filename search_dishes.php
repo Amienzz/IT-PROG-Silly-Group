@@ -3,42 +3,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Search dishes</title>
-    <style>
-        .hidden {
-            display: none;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
-            text-align: center;
-            margin: 20px;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        a {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 10px;
-            text-decoration: none;
-            color: #fff;
-            background-color: #5dd55d;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        a:hover {
-            background-color: #2aa22a;
-        }
-
-        select {
-            width: 50%; 
-            margin: 0 auto;
-        }
-    </style>
 </head>
 <body>
 <?php

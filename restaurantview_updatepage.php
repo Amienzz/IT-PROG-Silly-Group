@@ -3,45 +3,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Update Restaurant Reviews</title>
-    <style>
-        body {
-            text-align: center;
-        }
-
-        form {
-            display: inline-block;
-            text-align: left;
-            margin: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #32a852;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        button[type="button"] {
-            margin-right: 10px;
-        }
-    </style>
 </head>
 <body>
     <?php

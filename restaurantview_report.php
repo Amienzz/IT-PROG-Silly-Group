@@ -3,47 +3,6 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Restaurant Reviews</title>
-    <style>
-        body {
-            text-align: center;
-            margin: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-
-        a {
-            display: inline-block;
-            margin: 5px;
-            padding: 8px 15px;
-            text-decoration: none;
-            color: #fff;
-            border-radius: 5px;
-        }
-
-        input[type="submit"] {
-            margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #32a852;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
 </head>
 <body>
     <form action="mainpage.php" method="post">

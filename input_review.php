@@ -5,50 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<style>
-    body {
-        text-align: center;
-    }
-
-    form {
-        display: inline-block;
-        text-align: left;
-        margin: 20px;
-    }
-
-    p {
-        color: #666;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 10px;
-        color: #333;
-    }
-
-    select, textarea {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        box-sizing: border-box;
-        background-color: #f8f9fa;
-    }
-
-    button {
-        padding: 10px 20px;
-        background-color: #32a852;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    button[type="button"] {
-        margin-right: 10px;
-    }
-</style>
 <body>
     <h2>Create a dish review</h2>
 
