@@ -36,6 +36,11 @@ ul{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.textbox_border button {
+    display: block;
+    margin: 0 auto;
+}
+
 .textbox{
     width: 80%;
     margin: 0 auto;
