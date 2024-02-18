@@ -10,23 +10,60 @@
     <header class="taskbar"></header>
 
     <main>
-        <form class="textbox_border" action="login_verification.php">
-            <h3>Log in</h3>
+        <!--Login div-->
+        <div id="login">
+            <h1></h1>
+            <form class="textbox_border" method="post" action="login_verification.php">
+                <h3>Log in</h3>
 
-            <div class="textbox">
-                <label for="email">Email:</label>
-                <input type="text" class = "login_input" id="email" name="email" required>
+                <div class="textbox">
+                    <label for="email">Email:</label>
+                    <input type="text" class="login_input" id="email" name="email" required>
+                    
+                    <label for="password">Password:</label>
+                    <input type="password" class="login_input" id="password" name="password" required>
+                </div>
+                    
+                <button type="submit">Login</button>
+            </form>
+        
+            <button onclick="hide(this); show(create_account)">Don't have an account? Sign up now!</button>  
+        </div>
+
+        <!--Create account div-->
+        <div id="create_account" style="display: none;">
+            <form class="textbox_border">
+                <h3>Create an account!</h3>
+
+                <div class="textbox">
+                    <label for="firstname">First Name: </label>
+                    <input type="text" class = "login_input" id="firstname" name="firstname" required>
+                    
+                    <label for="middle_initial">Middle Initial: </label>
+                    <input type="text" class = "login_input" id="middle_initial" name="middle_initial" maxlength = "1" required>
+                    
+                    <label for="last_name">Last Name: </label>
+                    <input type="text" class = "login_input" id="last_name" name="last_name" required>
+                    
+                    <label for="birthday">Birthday: </label>
+                    <input type="date" class = "login_input" id="birthday" name="birthday" style="width: 45%" required>
+                    
+                    <label for="gender">Gender: </label>
+                    <select id="gender" name="gender" class = "login_input" style="width: 45%;">  
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Non-binary">Non-binary</option>
+                        <option value="Prefer not to say">Prefer not to say</option> 
+                    </select>
+                </div>
                 
-                <label for="password">Password:</label>
-                <input type="password" class = "login_input" id="password" name="password" required>
-            </div>
-                
-            <button type="submit">Login</button>
-        </form>
-    
-        <form action="create_account.html" method="post">
-            <button type="submit">Don't have an account? Sign up now!</button>
-        </form>
+                <button type="submit" action = "creation_processing.php">Create Account</button>
+            </form>
+
+            <button onclick="hide(this); show(login)" type="submit" style="background-color: red;">Cancel</button>
+        </div>
     </main>
+
+    <script src="script.js"></script>
 </body>
 </html>
