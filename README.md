@@ -63,3 +63,6 @@ Added to the Repository are the following:
 - new_bio_process.php
 - process_view.php
 - deactivate_process.php
+Changelog 1.05b (As of 1:35 PM 23/02/2024)
+Added to the Repository are the following:
+- FE files
