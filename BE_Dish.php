@@ -1,10 +1,14 @@
 <?php
+include 'back_Database.php';
+?>
+
+<?php
 class Dish extends DatabaseConn{
     
-    public function add_dish($dish_name, $dish_price, $category, $dish_restaurant)
+    public function add_dish($dish_name, $dish_price, $category, $resto_id)
     {
-        $stmt = $this->conn->prepare("INSERT INTO dish (dish_name, dish_price, dish_category, dish_restaurant) VALUES(?,?,?,?)");
-        $stmt->bind_param('siss', $dish_name, $dish_price, $category, $dish_restaurant);
+        $stmt = $this->conn->prepare("INSERT INTO dish (dish_name, dish_price, dish_category, resto_id) VALUES(?,?,?,?)");
+        $stmt->bind_param('sisi', $dish_name, $dish_price, $category, $resto_id);
         $stmt->execute();
 
         return 100;
@@ -23,9 +27,9 @@ class Dish extends DatabaseConn{
         return 100;
 
     }
-    public function update_dish($dish_id, $dish_price, $dish_name){
-        $stmt = $this->conn->prepare("UPDATE dish SET dish_name = ?, dish_category = ? WHERE dish_id = ?");
-        $stmt->bind_param("isi", $dish_name, $dish_category, $dish_id);
+    public function modify_dish($dish_id, $dish_price, $dish_name){
+        $stmt = $this->conn->prepare("UPDATE dish SET dish_name = ?, dish_price = ? WHERE dish_id = ?");
+        $stmt->bind_param("sii", $dish_name, $dish_price, $dish_id);
         $stmt->execute();
 
         return 100;
@@ -48,8 +52,9 @@ class Dish extends DatabaseConn{
     public function get_dish_list_given_id($dish_id)
     {
         $stmt = $this->conn->prepare("SELECT * FROM dish WHERE dish_id = ?");
-        $stmt->execute();
         $stmt->bind_param("i", $dish_id);
+        $stmt->execute();
+        
         $result = $stmt->get_result();
         $single_data = array();
 
@@ -57,12 +62,14 @@ class Dish extends DatabaseConn{
         {
             $single_data = $result->fetch_assoc();
         }
-        return $single_data;        
+        return $single_data;   
+        
+        
     }
     public function get_dish_list_given_dish_category($dish_category)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM dish WHERE dish-category = ?");
-        $stmt->bind_param("i", $dish_category);
+        $stmt = $this->conn->prepare("SELECT * FROM dish WHERE dish_category = ?");
+        $stmt->bind_param("s", $dish_category);
         $stmt->execute();
         $result = $stmt->get_result();
         $all_data = array();

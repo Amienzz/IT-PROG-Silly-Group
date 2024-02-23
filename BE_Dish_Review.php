@@ -1,9 +1,13 @@
 <?php
+include 'back_Database.php';
+?>
+
+<?php
 class Dish_Review extends DatabaseConn{
-    public function add_dish_review($dish_id, $user_id, $dish_overall_rating, $dish_quality_rating, $dish_price_rating, $dish_review_text, $dish_time_of_upload)
+    public function add_dish_review($dish_id, $user_id, $dish_overall_rating, $dish_quality_rating, $dish_price_rating, $dish_review_text)
     {
-        $stmt = $this->conn->prepare("INSERT INTO dish_review (dish_review_id, dish_id, user_id, dish_overall_rating, dish_quality_rating, dish_price_rating, dish_review_text, dish_time_of_upload) VALUES (?,?,?,?,?,?,?,?)");
-        $stmt->bind_param("iiiiiiss", $dish_review_id, $dish_id, $user_id, $dish_overall_rating, $dish_quality_rating, $dish_price_rating, $dish_review_text, $dish_time_of_upload);
+        $stmt = $this->conn->prepare("INSERT INTO dish_review (dish_review_id, dish_id, user_id, dish_overall_rating, dish_quality_rating, dish_price_rating, dish_review_text, dish_time_of_upload) VALUES (?,?,?,?,?,?,?,CURRENT_TIMESTAMP)");
+        $stmt->bind_param("iiiiiis", $dish_review_id, $dish_id, $user_id, $dish_overall_rating, $dish_quality_rating, $dish_price_rating, $dish_review_text);
         $stmt->execute();
         return 100;
     }
@@ -40,7 +44,7 @@ class Dish_Review extends DatabaseConn{
 
     public function get_dish_review_list_given_id($dish_review_id)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM dish_review WHERE review_id = ?");
+        $stmt = $this->conn->prepare("SELECT * FROM dish_review WHERE dish_review_id = ?");
         $stmt->bind_param("i", $dish_review_id);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -67,6 +71,8 @@ class Dish_Review extends DatabaseConn{
 
         return $all_data;         
     }
+
+    /*
     public function get_dish_review_given_resto($resto_id)
     {
         $stmt = $this->conn->prepare("SELECT * FROM dish_review WHERE resto_id = ?");
@@ -80,6 +86,7 @@ class Dish_Review extends DatabaseConn{
         }
         return $all_data;
     }
+    */
 }
 
 ?>

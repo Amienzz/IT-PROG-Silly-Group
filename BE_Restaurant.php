@@ -1,19 +1,25 @@
 <?php
+include 'back_Database.php';
+?>
+<?php
+
 class resto extends DatabaseConn{
-    public function add_resto($resto_description, $resto_email, $resto_websitelink)
+    public function add_resto($resto_user_id, $resto_name, $resto_description, $resto_email, $resto_websitelink)
     {
-        $stmt = $this->conn->prepare("INSERT INTO resto (resto_name, resto_description, resto_email, resto_websitelink) VALUES (?,?,?,?)");
-        $stmt->bind_param("ssss", $resto_description, $resto_email, $resto_websitelink);
+        
+        $stmt = $this->conn->prepare("INSERT INTO resto (user_id, resto_name, resto_description, resto_email, resto_websitelink) VALUES (?,?,?,?,?)");
+        $stmt->bind_param("issss", $resto_user_id, $resto_name, $resto_description, $resto_email, $resto_websitelink);
         $stmt->execute();
         return 100;
     }
     //this should include all the dishes and the reviews as well.
-    public function delete_resturant($resto_id)
+    public function delete_resto($resto_id)
     {   
 
         //to delete the dish_reviews from the specific resto
-        $stmt3 = $this->conn->prepare("DELETE FROM dish_review WHERE dish_id = (SELECT dish_id FROM dish WHERE resto_id = ?");
+        $stmt3 = $this->conn->prepare("DELETE FROM dish_review WHERE dish_id IN (SELECT dish_id FROM dish WHERE resto_id = ?)");
         $stmt3->bind_param("i", $resto_id);
+        $stmt3->execute();
 
 
         //to delete the dish from the specific resto
@@ -30,10 +36,10 @@ class resto extends DatabaseConn{
 
     }
 
-    public function modify_resto($resto_name, $resto_description, $resto_email, $resto_websitelink)
+    public function modify_resto($resto_name, $resto_description, $resto_email, $resto_websitelink, $resto_id)
     {
-        $stmt = $this->conn->prepare("UPDATE resto SET resto_name = ?, resto_description = ?, resto_email = ?, resto_websitelinklink = ? WHERE resto_id = ?");
-        $stmt->bind_param("ssssi", $resto_name, $resto_description, $resto_email, $resto_websitelink);
+        $stmt = $this->conn->prepare("UPDATE resto SET resto_name = ?, resto_description = ?, resto_email = ?, resto_websitelink = ? WHERE resto_id = ?");
+        $stmt->bind_param("ssssi", $resto_name, $resto_description, $resto_email, $resto_websitelink, $resto_id);
         $stmt->execute();
         
         return 100;
@@ -54,9 +60,9 @@ class resto extends DatabaseConn{
     }
 
 
-    public function get_dish_list_given_id($resto_id)
+    public function get_resto_list_given_id($resto_id)
     {
-        $stmt = $this->conn->prepare("SELECT * FROM resto WHERE R_id = ?");
+        $stmt = $this->conn->prepare("SELECT * FROM resto WHERE resto_id = ?");
         $stmt->bind_param("i", $resto_id);
         $stmt->execute();
         
