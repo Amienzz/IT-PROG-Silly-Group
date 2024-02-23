@@ -41,6 +41,17 @@ include 'BE_RestaurantReviews.php';
         echo $row['resto_review_date'] . '<br>';
     }
 
+    echo "dDJWIDJAWIDJAWDIJAWDAIWJDiji";
+    $data4 = $restaurantreviewZ->get_resto_review_given_user_id(1); // this is the all the ressto review given user id
+    foreach($data4 as $row)
+    {
+        echo $row['resto_id'] . '<br>';
+        echo $row['user_id'] . '<br>';
+        echo $row['resto_review_overall_rating'] . '<br>';
+        echo $row['resto_review_text'] . '<br>';
+        echo $row['resto_review_date'] . '<br>';
+    }
+
 
 
 

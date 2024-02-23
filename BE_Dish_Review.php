@@ -87,6 +87,20 @@ class Dish_Review extends DatabaseConn{
         return $all_data;
     }
     */
+
+    public function get_dish_review_given_user($user_id)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM dish_review WHERE user_id = ?");
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $all_data = array();
+        while ($row = $result->fetch_assoc())
+        {
+            $all_data[] = $row;
+        }
+        return $all_data;
+    }
 }
 
 ?>

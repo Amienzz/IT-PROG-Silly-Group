@@ -48,9 +48,20 @@ include 'BE_Dish_Review.php';
     $data3 = $dish_review->get_dish_review_list_given_id(4);
     echo $data3['dish_review_id'] . '<br>';
 
-    
+    echo "DJIAWDJWAIDJAWIDJIAWDJIAWDJIAW";
 
-
+    $data4 = $dish_review->get_dish_review_given_user(1);
+    foreach($data4 as $row)
+    {
+        echo $row['dish_review_id'] . '<br>';
+        echo $row['dish_id'] . '<br>';
+        echo $row['user_id'] . '<br>';
+        echo $row['dish_overall_rating'] . '<br>';
+        echo $row['dish_quality_rating'] . '<br>';
+        echo $row['dish_price_rating'] . '<br>';
+        echo $row['dish_review_text'] . '<br>';
+        echo $row['dish_time_of_upload'] . '<br>';
+    }
 
 ?>
 </body>
