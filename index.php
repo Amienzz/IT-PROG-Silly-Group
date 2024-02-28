@@ -12,8 +12,7 @@
     <main>
         <!--Login div-->
         <div id="login">
-            <h1></h1>
-            <form class="textbox_border" method="post" action="login_verification.php">
+            <form class="textbox_border" method="post">
                 <h3>Log in</h3>
 
                 <div class="textbox">
@@ -24,18 +23,30 @@
                     <input type="password" class="login_input" id="password" name="password" required>
                 </div>
                     
-                <button type="submit">Login</button>
+                <button type="submit" name="login">Login</button>
             </form>
         
+            <?php
+                if(isset($_POST['login'])){
+                    //Verify login credentials; if valid then redirect to main page and store login into $_SESSION variable, otherwise redirect back here
+                    
+                    //Only for testing purposes, put inside proper conditional parameters
+                    header("Location: mainpage.php");
+                    exit;
+                }
+            ?>
+
             <button onclick="hide(this); show(create_account)">Don't have an account? Sign up now!</button>  
         </div>
 
         <!--Create account div-->
         <div id="create_account" style="display: none;">
-            <form class="textbox_border">
+            <form class="textbox_border" method="post">
                 <h3>Create an account!</h3>
 
                 <div class="textbox">
+                    <h4>Personal details</h4>
+
                     <label for="firstname">First Name: </label>
                     <input type="text" class = "login_input" id="firstname" name="firstname" required>
                     
@@ -55,10 +66,34 @@
                         <option value="Non-binary">Non-binary</option>
                         <option value="Prefer not to say">Prefer not to say</option> 
                     </select>
+
+                    <br><h4>Profile details</h4>
+
+                    <label for="username">Username: </label>
+                    <input type="text" class = "login_input" id="username" name="username" required>
+
+                    <label for="password">Password: </label>
+                    <input type="password" class="login_input" id="password" name="password" required>
+
+                    <label for="account_type">Account type:</label><br>
+                    <input type="radio" id="user" name="acc_type" value="user" required>
+                    <label for="user">User</label>
+                    <input type="radio" id="business" name="acc_type" value="business" required>
+                    <label for="business">Business</label>
                 </div>
                 
-                <button type="submit" action = "creation_processing.php">Create Account</button>
+                <button type="submit" name="create">Create Account</button>
             </form>
+
+            <?php
+                if(isset($_POST['create'])){
+                    //Verify if no conflicting email, if it exists then redirect back here, else create the account and store credentials into $_SESSION variable and go to main page
+                    
+                    //Only for testing purposes, put inside proper conditional parameters
+                    header("Location: mainpage.php");
+                    exit;
+                }
+            ?>
 
             <button onclick="hide(this); show(login)" type="submit" style="background-color: red;">Cancel</button>
         </div>

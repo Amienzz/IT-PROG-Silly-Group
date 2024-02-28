@@ -8,7 +8,7 @@
 <body>
     <header class="taskbar"></header>
 
-    <div id="create_restoreview">
+    <div id="create_restoreview" style="display: none;">
         <select id="rating" name="rating" required>
             <option value="" selected disabled hidden>Select an option</option>
             <option value="Excellent">Excellent</option>

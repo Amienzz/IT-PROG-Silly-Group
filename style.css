@@ -51,7 +51,7 @@ ul{
 .login_input {
     width: 100%;
     padding: 4px;
-    text-align: center;
+    text-align: left;
     margin-bottom: 16px;
     box-sizing: border-box;
     border: 1px solid #ccc;
