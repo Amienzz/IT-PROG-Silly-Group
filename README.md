@@ -66,3 +66,9 @@ Added to the Repository are the following:
 Changelog 1.05b (As of 1:35 PM 23/02/2024)
 Added to the Repository are the following:
 - FE files
+
+Changelog 1.06 (As of 9:22 PM 28/02/2024)
+Modified on the Repository are the following:
+- index.html -> index.php
+- style.css
+
