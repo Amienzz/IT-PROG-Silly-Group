@@ -72,3 +72,36 @@ Modified on the Repository are the following:
 - index.html -> index.php
 - style.css
 
+Changelog 1.07 (As of 9:57 PM 28/02/2024)
+Added to the Repository are the following:
+-FUNC_RR.php
+-FUNC_DR.php
+-FUNC_Search.php
+-FUNC_Dish.php
+-FUNC_Profile.php
+
+Modified on the Reposity are the following:
+- Changed mainpage.php into MAIN_page.php
+
+Merged the following contents into the respective file:
+- FUNC_DR.php
+-   input_review.php
+-   view_dishreview.php
+-   search_review.php
+
+- FUNC_Dish.php
+-   add_dish.html
+-   view_dish.php
+-   search_dishes.php
+-   delete_dish_category.html
+
+- FUNC_Profile.php
+-   edit_username.html
+-   edit_bio.html
+-   edit_number.html
+
+- FUNC_Search.php
+-   process_view.php
+
+All contents of each individual files have been siphoned and inserted into their respecive FUNC_X.php file. DO NOT EXPECT THE CODE TO WORK. THE TRANSFERRING IS MERELY TO ALLEVIATE FILE-REPOSITORY BLOATING AND PROPER NAMING CONVENTIONS.
+
