@@ -70,7 +70,6 @@ Added to the Repository are the following:
 Changelog 1.06 (As of 9:22 PM 28/02/2024)
 Modified on the Repository are the following:
 - index.html -> index.php
-- style.css
 
 Changelog 1.07 (As of 9:57 PM 28/02/2024)
 Added to the Repository are the following:
@@ -102,6 +101,18 @@ Merged the following contents into the respective file:
 
 - FUNC_Search.php
 -   process_view.php
+  
 
 All contents of each individual files have been siphoned and inserted into their respecive FUNC_X.php file. DO NOT EXPECT THE CODE TO WORK. THE TRANSFERRING IS MERELY TO ALLEVIATE FILE-REPOSITORY BLOATING AND PROPER NAMING CONVENTIONS.
 
+
+
+
+Changelog 1.08 (As of 10:18 PM 1/03/2024)
+Added BE_Account.php
+- functions isUsernameTaken
+- functions isEmailTaken
+- function verify_password (for renew password and for new user accounts)
+- function log_in
+- function date_today (gets the current date)
+- function register_user(only use this for making new accounts)
