@@ -1,5 +1,4 @@
 <?php
-    include 'BE_Restaurant.php';
     include 'BE_RestaurantReviews.php';
 ?>
 

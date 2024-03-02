@@ -1,6 +1,5 @@
 
 <?php
-    include 'BE_Dish.php';
     include 'BE_Dish_Review.php';
 ?>
 
