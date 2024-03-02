@@ -1,3 +1,8 @@
+<?php
+    include 'BE_Restaurant.php';
+    include 'BE_RestaurantReviews.php';
+?>
+
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -68,5 +73,69 @@
     </div>
 
     <script src="script.js"></script>
+
+
+
+    <?php
+    
+    //FOR THE PROCESSING
+    if(isset($_POST['A'])) // if the form name is A in the main page this will be executed(updating the review)
+    {
+        $resto_review = new RestaurantReviews();
+        $resto_review_id = $_POST['resto_review_id']; //the name of the input field in the form
+        $resto_review_overall_rating = $_POST['resto_review_overall_rating'];
+        $resto_review_text = $_POST['resto_review_text'];
+
+        $resto_review->modify_resto_reviews($resto_review_id, $resto_review_overall_rating, $resto_review_text);
+    }
+
+    elseif(isset($_POST['B'])) // if the form name is B in the main page this will be executed(adding the review)
+    {
+        $resto_review = new RestaurantReviews();
+        $resto_id = $_POST['resto_id'];
+        $user_id = $_POST['user_id'];
+        $resto_review_overall_rating = $_POST['resto_review_overall_rating'];
+        $resto_review_text = $_POST['resto_review_text'];
+
+        $resto_review->add_resto_reviews($resto_id, $user_id, $resto_review_overall_rating, $resto_review_text);
+        
+    }
+    elseif(isset($_POST['C'])) // if the form name is C in the main page this will be executed(deleting the review)
+    {
+        $resto_review = new RestaurantReviews();
+        $resto_review_id = $_POST['resto_review_id'];
+
+        $resto_review->delete_resto_reviews($resto_review_id);
+    }
+
+    elseif(isset($_POST['D'])) // if the form name is D in the main page this will be executed(show all the CURRENTLY LOGIN USER REVIEW on restaurant)
+    {
+        $resto_review = new RestaurantReviews();
+        $user_id = $_POST['user_id'];
+        
+        $resto_review->get_resto_review_given_user_id($user_id);
+    }
+    elseif(isset($_POST['E'])) // if the form name is D in the main page this will be executed(SHOWS ALL THE USER REVIEW on restaurant)
+    {
+        $resto_review = new RestaurantReviews();
+        $user_id = $_POST['user_id'];
+        
+        $resto_review->get_resto_review_given_user_id($user_id);
+    }
+    elseif(isset($_POST['F'])) // gets the list of the restos available<this should be used to show what the user can rate>
+    {
+        $resto = new resto();
+        $resto->get_resto_list();
+    }
+    elseif(isset($_POST['G']))
+    {
+        $resto_review = new RestaurantReviews(); // gets a specific review given the review_id
+        $resto_id = $_POST['resto_id'];
+        $resto_review->get_resto_review_given_resto_id($resto_id);
+    }
+
+
+?>
+
 </body>
 </html>

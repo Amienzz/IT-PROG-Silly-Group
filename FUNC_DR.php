@@ -1,3 +1,9 @@
+
+<?php
+    include 'BE_Dish.php';
+    include 'BE_Dish_Review.php';
+?>
+
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -71,6 +77,59 @@
 </body>
 </html>
 
+
+<?php
+
+    
+
+    if(isset($_POST['A'])) //if the form name is A in the main page this will be executed(updating the review)
+    {
+
+        $dish_review = new Dish_Review();
+        $dish_review_id = $_POST['dish_review_id'];
+        $dish_overall_rating = $_POST['dish_overall_rating'];
+        $dish_quality_rating = $_POST['dish_quality_rating'];
+        $dish_price_rating = $_POST['dish_price_rating'];
+        $dish_review_text = $_POST['dish_review_text'];
+
+        $dish_review->modify_dish_review($dish_Review_id, $dish_overall_rating, $dish_quality_rating, $dish_price_rating, $dish_review_text);
+    }
+
+    if(isset($_POST['B'])) // if the form name is B in the main page this will be executed(adding the review)
+    {
+        $dish_review = new Dish_Review();
+        $dish_id = $_POST['dish_id'];
+        $user_id = $_POST['user_id'];
+        $dish_overall_rating = $_POST['dish_overall_rating'];
+        $dish_quality_rating = $_POST['dish_quality_rating'];
+        $dish_price_rating = $_POST['dish_price_rating'];
+        $dish_review_text = $_POST['dish_review_text'];
+        $dish_review->add_dish_review($dish_id, $user_id, $dish_overall_rating, $dish_quality_rating, $dish_price_rating, $dish_review_text);
+
+    }
+    if(isset($_POST['C'])) // if the form name is C in the main page this will be executed(deleting the review)
+    {
+        $dish_review = new Dish_Review();
+        $dish_review_id = $_POST['dish_review_id'];
+        $dish_review->delete_dish_review($dish_review_id);
+
+    }
+
+    if(isset($_POST['D'])) // if the form name is D in the main page this will be executed(show all the CURRENTLY LOGIN USER REVIEW on dish
+    {
+
+        $dish_review = new Dish_Review();
+        $user_id = $_POST['user_id'];
+        $dish_review->get_dish_review_given_user($user_id);
+    }
+    if(isset($_POST['E'])) // if the form name is E in the main page this will be executed(show all the review on dish)
+    {
+
+        $dish_review = new Dish_Review();
+        $dish_review->get_dish_review_list();
+    }
+
+?>
 <!-- CODE FOR ALL THE EXISTING CODE:
 
 

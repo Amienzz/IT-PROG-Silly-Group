@@ -81,6 +81,20 @@ class Dish extends DatabaseConn{
         return $all_data;      
     }
 
+    public function get_dish_list_given_user_id($user_id)
+    {
+        $stmt = $this->conn->prepare("SELECT * FROM dish WHERE resto_id = (SELECT resto_id FROM resto WHERE user_id = ?)");
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $all_data = array();
+        while ($row = $result->fetch_assoc())
+        {
+            $all_data[] = $row;
+        }
+        return $all_data;
+    }
+
 }
 
 
