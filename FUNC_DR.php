@@ -6,71 +6,73 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Restaurant Reviews</title>
+    <title>Dish Reviews</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="taskbar"></header>
 
-    <div id="create_restoreview">
-        <select id="rating" name="rating" required>
-            <option value="" selected disabled hidden>Select an option</option>
-            <option value="Excellent">Excellent</option>
-            <option value="Good">Good</option>
-            <option value="Average">Average</option>
-            <option value="Fair">Fair</option>
-            <option value="Poor">Poor</option>
+    <div id="create_dish_review">
+        <h2>Create a Dish Review</h2>
+        <form action="FUNC_DR.php" method="post">
 
-        Write a Review:
-        <textarea id="review" name="review" rows="5" cols="60" required></textarea><br>
+            <label for="dish_name">Dish Name:</label>
+            <input type="text" id="dish_name" name="dish_name" required>
+            <br>
 
-        <button>Submit</button>
+            <label>Overall Rating:</label>
+            <input type="radio" id="rating1" name="overall_rating" value="1" required>
+            <label for="rating1">1</label>
+            <input type="radio" id="rating2" name="overall_rating" value="2">
+            <label for="rating2">2</label>
+            <input type="radio" id="rating3" name="overall_rating" value="3">
+            <label for="rating3">3</label>
+            <input type="radio" id="rating4" name="overall_rating" value="4">
+            <label for="rating4">4</label>
+            <input type="radio" id="rating5" name="overall_rating" value="5">
+            <label for="rating5">5</label>
+            <br>
 
-        <br><button onclick="window.location.href='MAIN_page.php'">Return</button>
+            <label for="review_text">Review:</label>
+            <textarea id="review_text" name="review_text" rows="5" cols="40" required></textarea>
+            <br>
+            <button type="submit">Submit Review</button>
+        </form>
     </div>
 
-    <div id="view_restoreview" style="display: none;">
-        <table>
-            <thead>
-                <tr>
-                    <th>Review ID</th>
-                    <th>Username</th>
-                    <th>Rating</th>
-                    <th>Review</th>
-                    <th>Date</th>
-                    <th>Modify</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                for ($i = 0; $i < count($R->review_idlist); $i++) {
-                    ?>
-                    <tr>
-                        <td><?php echo $R->review_idlist[$i]; ?></td>
-                        <td><?php echo $R->user_namelist[$i]; ?></td>
-                        <td><?php echo $R->rating_list[$i]; ?></td>
-                        <td><?php echo $R->review_textlist[$i]; ?></td>
-                        <td><?php echo $R->review_datelist[$i]; ?></td>
-                        <td>
-                            <?php if ($R->user_namelist[$i] == $loggedInUser) { ?>
-                                <a class="update" href="restaurantreview_update.php?i=<?php echo $i; ?>&source=list">Update</a>
-                                <a class="delete" href="restaurantreview_delete_processing.php?i=<?php echo $i; ?>&source=list">Delete</a><br>
-                            <?php } ?>
-                        </td>
-                    </tr>
-                <?php } ?>
-            </tbody> 
-        </table>
+    <!-- View, Update, and Delete a Review div -->
+    <div id="view_update_delete_review" style="display: none;">
+        <h2>View, Update, and Delete a Review</h2>
+        <button class="mainstyle" onclick="toggle(review_dish); toggle(mainpage)">View Reviews</button><br>
+        <button class="mainstyle" onclick="toggle(search_account); toggle(mainpage)">Update your Reviews</button><br>
+        <button class="mainstyle" onclick="toggle(search_account); toggle(mainpage)">Delete your Reviews</button><br>
+        <button class="mainstyle" onclick="window.location.href='index.php'">Logout</button><br>
+    </div>
+    
+    <!-- Search a Dish Review div -->
+    <div id="search_dish_review" style="display: none;">
+        <h2>Search a Dish Review</h2>
+
     </div>
 
-    <div id="update_restoreview" style="display: none;">
-        
-    </div>
+    
+    <script>
+    function toggleDiv(divId) {
+        const divToToggle = document.getElementById(divId);
+        const allDivs = document.querySelectorAll("#review_dish > div"); // Select all divs within the review_dish div
 
-    <div id="delete_restoreview" style="display: none;">
-        
-    </div>
+        // Hide all divs except the one to toggle
+        allDivs.forEach((div) => {
+            if (div !== divToToggle) {
+                div.style.display = "none";
+            }
+        });
+
+        // Show the selected div
+        divToToggle.style.display = "block";
+    }
+    </script>
 
     <script src="script.js"></script>
 </body>
@@ -78,9 +80,6 @@
 
 
 <?php
-
-    
-
     if(isset($_POST['A'])) //if the form name is A in the main page this will be executed(updating the review)
     {
 

@@ -42,20 +42,44 @@ $bio = $P->getBio();*/
     </p>
 </div>-->
 
-<!--Main page div-->
+<style>
+    .mainstyle {
+        width: 250px; 
+        height: 40px; 
+        padding: 10px; 
+        font-size: 16px;    
+        margin-bottom: 10px; 
+        cursor: pointer; 
+        border: none; 
+        background-color: #52bd52; /
+        color: #fff; 
+        border-radius: 5px; 
+    }
+    .mainstyle:hover {
+        background-color: #3c6444; 
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center; /* Center horizontally */
+        align-items: center; /* Center vertically */
+    }
+</style>
+
+<!-- Main page div -->
 <div id="mainpage">
     <main>
-        <!--User account functions-->
-        <button onclick="toggle(review_restaurant); toggle(mainpage)">Review the restaurant</button><br>
-        <button onclick="toggle(review_dish); toggle(mainpage)">Review a dish</button><br>
+        <!-- User account functions -->
+        <button class="mainstyle" onclick="toggle(review_restaurant); toggle(mainpage)">Review the restaurant</button><br>
+        <button class="mainstyle" onclick="toggle(review_dish); toggle(mainpage)">Review a dish</button><br>
 
-        <!--Business account functions-->
-        <button onclick="toggle(dishes)">Dishes</button><br>
+        <!-- Business account functions -->
+        <button class="mainstyle" onclick="toggle(dishes); toggle(mainpage)">Dishes [SERVERSIDE]</button><br>
 
-        <!--Any account functions-->
-        <button onclick="toggle(review_dish); toggle(mainpage)">Account Settings</button><br>
-        <button onclick="toggle(search_account); toggle(mainpage)">Search Account</button><br>
-        <button onclick="window.location.href='index.php'">Logout</button><br>
+        <!-- Any account functions -->
+        <button class="mainstyle" onclick="toggle(review_dish); toggle(mainpage)">Account Settings</button><br>
+        <button class="mainstyle" onclick="toggle(search_account); toggle(mainpage)">Search Account</button><br>
+        <button class="mainstyle" onclick="window.location.href='index.php'">Logout</button><br>
     </main>
 </div>
 
@@ -106,7 +130,7 @@ $bio = $P->getBio();*/
     <main>
         <form action="FUNC_DR.php" method="get">
             <input type="hidden" name="action" value="create">
-            <button type="submit">Create a Dish Review</button>
+            <button onclick="scrollToCreateDishReview()">Create a Dish Review</button>
         </form>
 
         <form action="FUNC_DR.php" method="get">
@@ -122,6 +146,7 @@ $bio = $P->getBio();*/
         <button onclick="toggle(review_dish); toggle(mainpage)">Return to main menu</button><br>
     </main>
 </div>
+
 
 <!--Dishes div-->
 <div id="dishes" style="display: none;">
@@ -146,7 +171,7 @@ $bio = $P->getBio();*/
             <button type="submit">Delete Dish</button>
         </form>
 
-        <button onclick="toggle(review_restaurant); toggle(mainpage)">Return to Main Menu</button><br>
+        <button onclick="toggle(dishes); toggle(mainpage)">Return to Main Menu</button><br>
     </main>
 </div>
 
@@ -168,7 +193,7 @@ $bio = $P->getBio();*/
             <button type="submit">Edit Number</button>
         </form>
 
-        <button onclick="toggle(review_restaurant); toggle(mainpage)">Return to Main Menu</button><br>
+        <button onclick="toggle(profile); toggle(mainpage)">Return to Main Menu</button><br>
     </main>
 </div>
 
@@ -189,63 +214,6 @@ $bio = $P->getBio();*/
         <button onclick="toggle(search_account); toggle(mainpage)">Return to Main Menu</button>
     </main>
 </div>
-
-<!-- DELETE THE CONTENTS WITHIN THESE BOUNDS -->
-<!-- DELETE THE CONTENTS WITHIN THESE BOUNDS -->
-<!-- DELETE THE CONTENTS WITHIN THESE BOUNDS -->
-<!-- DELETE THE CONTENTS WITHIN THESE BOUNDS -->
-<!--Review dish div-->
-<!--
-
-<div id="review_dish" style="display: none;">
-    <main>
-        <button onclick="window.location.href='input_review.php'">Create a dish review</button><br>
-        <button onclick="window.location.href='view_dishreview.php'">View, Update, and Delete a review</button><br>
-        <button onclick="window.location.href='search_review.php'">Search a dish review</button><br>
-        <button onclick="toggle(review_dish); toggle(mainpage)">Return to main menu</button><br>
-    </main>
-</div>
- Dishes div
-<div id="dishes" style="display: none;">
-    <main>
-        <button onclick="window.location.href='add_dish.html'">Add Dish</button>
-        <button onclick="window.location.href='view_dish.jsp'">View & Update Dish</button>
-        <button onclick="window.location.href='search_dishes.jsp'">Search Dish</button>
-        <button onclick="window.location.href='delete_dish_category.html'">Delete Dish</button><br>
-        <button onclick="toggle(review_dish); toggle(mainpage)">Return to Main Menu</button>
-    </main>
-</div>
- Profile div
-<div id="profile" style="display: none;">
-    <main>
-        <button onclick="window.location.href='edit_username.html'">Edit Username</button>
-        <button onclick="window.location.href='edit_bio.html'">Edit Bio</button>
-        <button onclick="window.location.href='edit_number.html'">Edit Number</button>
-        <button onclick="toggle(profile); toggle(mainpage)">Return to Main Menu</button>
-    </main>
-</div>
- Search Account div
-<div id="search_account" style="display: none;">
-    <main>
-        <form action = "process_view.jsp">                                                                 
-            <label for="gender">Gender: </label>
-            <select id="gender" name="gender">  
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                 <option value="Non-binary">Non-binary</option>
-                <option value="Prefer not to say">Prefer not to say</option> 
-            </select>
-            <br>
-            <button onclick="">Search Account</button>
-        </form>
-        <button onclick="toggle(search_account); toggle(mainpage)">Return to Main Menu</button>
-    </main>
-</div>
--->
-<!-- DELETE THE CONTENTS WITHIN THESE BOUNDS -->
-<!-- DELETE THE CONTENTS WITHIN THESE BOUNDS -->
-<!-- DELETE THE CONTENTS WITHIN THESE BOUNDS -->
-<!-- DELETE THE CONTENTS WITHIN THESE BOUNDS -->
 
 <script src="script.js"></script>
 </body>

@@ -31,7 +31,7 @@
                     //Verify login credentials; if valid then redirect to main page and store login into $_SESSION variable, otherwise redirect back here
                     
                     //Only for testing purposes, put inside proper conditional parameters
-                    header("Location: mainpage.php");
+                    header("Location: MAIN_page.php");
                     exit;
                 }
             ?>
@@ -90,7 +90,7 @@
                     //Verify if no conflicting email, if it exists then redirect back here, else create the account and store credentials into $_SESSION variable and go to main page
                     
                     //Only for testing purposes, put inside proper conditional parameters
-                    header("Location: mainpage.php");
+                    header("Location: MAIN_page.php");
                     exit;
                 }
             ?>

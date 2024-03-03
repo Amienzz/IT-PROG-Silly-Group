@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <header class="taskbar"></header>
 
     <div id="create_restoreview">
@@ -74,9 +75,10 @@
     <script src="script.js"></script>
 
 
+    
+
 
     <?php
-    
     //FOR THE PROCESSING
     if(isset($_POST['A'])) // if the form name is A in the main page this will be executed(updating the review)
     {
@@ -132,9 +134,7 @@
         $resto_id = $_POST['resto_id'];
         $resto_review->get_resto_review_given_resto_id($resto_id);
     }
-
-
-?>
+    ?>
 
 </body>
 </html>
