@@ -14,6 +14,11 @@
     <header class="taskbar"></header>
 
     <div id="create_restoreview">
+    <h2>Review a Restaurant!</h2>
+        <label for="restaurant_name">Restaurant Name:</label>
+        <input type="text" id="restaurant_name" name="restaurant_name" required>
+        <br>
+
         <select id="rating" name="rating" required>
             <option value="" selected disabled hidden>Select an option</option>
             <option value="Excellent">Excellent</option>
@@ -73,10 +78,6 @@
     </div>
 
     <script src="script.js"></script>
-
-
-    
-
 
     <?php
     //FOR THE PROCESSING

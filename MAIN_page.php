@@ -77,7 +77,7 @@ $bio = $P->getBio();*/
         <button class="mainstyle" onclick="toggle(dishes); toggle(mainpage)">Dishes [SERVERSIDE]</button><br>
 
         <!-- Any account functions -->
-        <button class="mainstyle" onclick="toggle(review_dish); toggle(mainpage)">Account Settings</button><br>
+        <button class="mainstyle" onclick="toggle(profile); toggle(mainpage)">Account Settings</button><br>
         <button class="mainstyle" onclick="toggle(search_account); toggle(mainpage)">Search Account</button><br>
         <button class="mainstyle" onclick="window.location.href='index.php'">Logout</button><br>
     </main>
@@ -128,25 +128,25 @@ $bio = $P->getBio();*/
 <!--Review dish div-->
 <div id="review_dish" style="display: none;">
     <main>
+        
         <form action="FUNC_DR.php" method="get">
             <input type="hidden" name="action" value="create">
-            <button onclick="scrollToCreateDishReview()">Create a Dish Review</button>
+            <button onclick="handleButtonClick('create')">Create a Dish Review</button>
         </form>
 
         <form action="FUNC_DR.php" method="get">
             <input type="hidden" name="action" value="view">
-            <button type="submit">View, Update, and Delete a Review</button>
+            <button onclick="handleButtonClick('view')">View, Update, or Modify Dish Review</button>
         </form>
 
         <form action="FUNC_DR.php" method="get">
             <input type="hidden" name="action" value="search">
-            <button type="submit">Search a Dish Review</button>
+            <button onclick="handleButtonClick('search')">Search a Dish Review</button>
         </form>
 
         <button onclick="toggle(review_dish); toggle(mainpage)">Return to main menu</button><br>
     </main>
 </div>
-
 
 <!--Dishes div-->
 <div id="dishes" style="display: none;">
