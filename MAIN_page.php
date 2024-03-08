@@ -86,7 +86,7 @@ $bio = $P->getBio();*/
 <!--Review Restaurant div-->
 <div id="review_restaurant" style="display: none;">
     <main>
-        <form action="FUNC_RR.php" method="get">
+        <form class="mainstyle" action="FUNC_RR.php" method="get">
             <input type="hidden" name="action" value="create">
             <button type="submit">Review the Restaurant</button>
         </form>
@@ -131,7 +131,7 @@ $bio = $P->getBio();*/
         
         <form action="FUNC_DR.php" method="get">
             <input type="hidden" name="action" value="create">
-            <button onclick="handleButtonClick('create')">Create a Dish Review</button>
+            <button class="mainstyle" onclick="handleButtonClick('create')">Create a Dish Review</button>
         </form>
 
         <form action="FUNC_DR.php" method="get">
