@@ -1,5 +1,5 @@
 <?php
-include 'Back_database.php';
+include_once 'Back_database.php';
 ?>
 
 

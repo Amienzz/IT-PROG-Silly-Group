@@ -1,6 +1,6 @@
 
 <?php
-    include 'BE_Dish_Review.php';
+    include_once 'BE_Dish_Review.php';
 ?>
 
 <html>

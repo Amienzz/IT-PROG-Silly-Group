@@ -1,5 +1,5 @@
 <?php
-    include 'BE_Dish.php';
+    include_once 'BE_Dish.php';
 ?>
 
 <html>
