@@ -1,23 +1,53 @@
 <?php
-    include 'BE_RestaurantReviews.php';
+    include_once 'BE_RestaurantReviews.php';
+    include_once 'BE_Restaurant.php';
+
 ?>
 
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
     <title>Restaurant Reviews</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
     <header class="taskbar"></header>
 
     <div id="create_restoreview">
-    <h2>Review a Restaurant!</h2>
-        <label for="restaurant_name">Restaurant Name:</label>
-        <input type="text" id="restaurant_name" name="restaurant_name" required>
-        <br>
+
+    <?php
+        $resto = new resto();
+        $data = $resto->get_resto_list();
+        echo "<div class='mainrestodiv'>";
+        foreach($data as $row)
+        {
+            echo "<div class='restodiv'>";
+            echo "Name: " . $row['resto_name'] . '<br>';
+            echo "description: " . $row['resto_description'] . '<br>';
+            echo "email: ". $row['resto_email'] . '<br>';
+            echo "website link: " . $row['resto_websitelink'] . '<br>';
+            echo "resto id: " . $row['resto_id'] . '<br>';
+            echo "</div>";
+        }
+        echo "</div>";
+                
+        ?>
+        
+        <h2>Review a Restaurant!</h2>
+
+        <label for="resto">Choose a Restaurant id:</label>
+
+        <select name="resto" id="resto" required>
+            <option value="" selected disabled hidden>Select an option</option>
+            <?php
+            foreach ($data as $row) {
+                echo "<option value='" . $row['resto_id'] . "'>" . $row['resto_id'] . "</option>";
+            }
+            ?>
+            </select>
+            <br>
+            Rate the restaurant:
 
         <select id="rating" name="rating" required>
             <option value="" selected disabled hidden>Select an option</option>
@@ -26,7 +56,8 @@
             <option value="Average">Average</option>
             <option value="Fair">Fair</option>
             <option value="Poor">Poor</option>
-
+        </select>
+            </br>
         Write a Review:
         <textarea id="review" name="review" rows="5" cols="60" required></textarea><br>
 
@@ -35,42 +66,69 @@
         <br><button onclick="window.location.href='MAIN_page.php'">Return</button>
     </div>
 
-    <div id="view_restoreview" style="display: none;">
+    <div id="view_restoreview">
         <table>
-            <thead>
-                <tr>
-                    <th>Review ID</th>
-                    <th>Username</th>
-                    <th>Rating</th>
-                    <th>Review</th>
-                    <th>Date</th>
-                    <th>Modify</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                for ($i = 0; $i < count($R->review_idlist); $i++) {
-                    ?>
-                    <tr>
-                        <td><?php echo $R->review_idlist[$i]; ?></td>
-                        <td><?php echo $R->user_namelist[$i]; ?></td>
-                        <td><?php echo $R->rating_list[$i]; ?></td>
-                        <td><?php echo $R->review_textlist[$i]; ?></td>
-                        <td><?php echo $R->review_datelist[$i]; ?></td>
-                        <td>
-                            <?php if ($R->user_namelist[$i] == $loggedInUser) { ?>
-                                <a class="update" href="restaurantreview_update.php?i=<?php echo $i; ?>&source=list">Update</a>
-                                <a class="delete" href="restaurantreview_delete_processing.php?i=<?php echo $i; ?>&source=list">Delete</a><br>
-                            <?php } ?>
-                        </td>
-                    </tr>
-                <?php } ?>
-            </tbody> 
+            <tr>
+                <th>resto id</th>
+                <th>review id</th>
+                <th>overall rating </th>
+                <th>description</th>
+                <th>Date</th>
+            </tr>
+            <?php
+            $restoreviews = new RestaurantReviews();
+            $data = $restoreviews->get_resto_review_list();
+            foreach($data as $row)
+            {
+                echo "<tr>";
+                echo "<td> resto id: " . $row['resto_id'] . '<br>';
+                echo "<td> user id: " . $row['user_id'] . '<br>';
+                echo "<td> overall rating: ". $row['resto_review_overall_rating'] . '<br>';
+                echo "<td> description: " . $row['resto_review_text'] . '<br>';
+                echo "<td> review date: " . $row['resto_review_date'] . '<br>';
+                echo "</tr>";
+            }
+            ?>
         </table>
     </div>
 
-    <div id="update_restoreview" style="display: none;">
-        
+    <div id="update_restoreview">
+    <table>
+        <tr>
+            <th>resto id</th>
+            <th>overall rating</th>
+            <th>description</th>
+            <th>resto review date</th>
+            <th>actions</th>
+        </tr>
+    
+    <?php
+        $restoreviewsupdate = new RestaurantReviews();
+        $data = $restoreviewsupdate->get_resto_review_list();
+        foreach($data as $row)
+        {
+            echo "<tr>";
+            echo "<td> resto id: " . $row['resto_id'] . '<br>';
+            echo "<td> overall rating: ". $row['resto_review_overall_rating'] . '<br>';
+            echo "<td> description: " . $row['resto_review_text'] . '<br>';
+            echo "<td> review date: " . $row['resto_review_date'] . '<br>';
+
+
+            echo '<td><form action="FUNC_RR.php" method="post">';
+            echo '<input type="hidden" name="A" value="' . $row['resto_review_id'] . '">';
+            echo '<button type="submit" name="Update">Update</button>';
+            echo '</form>';
+
+            echo '<form action="FUNC_RR.php" method="post">';
+            echo '<input type="hidden" name="A" value="' . $row['resto_review_id'] . '">';
+            echo '<button type="submit" name="Delete">Delete</button>';
+            echo '</form>';
+
+            
+            echo "</tr>";
+        }
+    ?>
+    </table>
     </div>
 
     <div id="delete_restoreview" style="display: none;">

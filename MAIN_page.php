@@ -86,23 +86,23 @@ $bio = $P->getBio();*/
 <!--Review Restaurant div-->
 <div id="review_restaurant" style="display: none;">
     <main>
-        <form class="mainstyle" action="FUNC_RR.php" method="get">
-            <input type="hidden" name="action" value="create">
+        <form action="FUNC_RR.php" name="review" method="get">
+            <input type="hidden" name="create" value="create">
             <button type="submit">Review the Restaurant</button>
         </form>
 
         <form action="FUNC_RR.php" method="get">
-            <input type="hidden" name="action" value="list">
+            <input type="hidden" name="list" value="list">
             <button type="submit">List Restaurant Reviews</button>
         </form>
 
         <form action="FUNC_RR.php" method="get">
-            <input type="hidden" name="action" value="update">
+            <input type="hidden" name="update" value="update">
             <button type="submit">Update Restaurant Reviews</button>
         </form>
 
         <form action="FUNC_RR.php" method="get">
-            <input type="hidden" name="action" value="delete">
+            <input type="hidden" name="delete" value="delete">
             <button type="submit">Delete Restaurant Reviews</button>
         </form>
 
@@ -112,12 +112,12 @@ $bio = $P->getBio();*/
         </form>
 
         <form action="FUNC_RR.php" method="get">
-            <input type="hidden" name="action" value="search">
+            <input type="hidden" name="search" value="search">
             <button type="submit">Search Restaurant Reviews</button>
         </form>
 
         <form action="FUNC_RR.php" method="get">
-            <input type="hidden" name="action" value="report">
+            <input type="hidden" name="report" value="report">
             <button type="submit">Restaurant Reviews Monthly Report</button>
         </form>
 

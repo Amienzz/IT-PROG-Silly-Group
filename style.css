@@ -77,3 +77,35 @@ button {
 button:hover {
     filter: brightness(0.8);
 }
+
+
+
+.mainrestodiv
+{
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap:50px;
+    border: 1px solid #8f8f8f;
+}
+
+.restodiv
+{
+    border: 2px solid #ffffff;
+    text-align: left;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+
+}
+
+th {
+    background-color: #313131;
+}

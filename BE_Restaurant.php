@@ -1,6 +1,7 @@
 <?php
-include 'back_Database.php';
+include_once 'back_Database.php';
 ?>
+
 
 
 <?php
