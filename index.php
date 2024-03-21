@@ -67,6 +67,12 @@
                         <option value="Prefer not to say">Prefer not to say</option> 
                     </select>
 
+                    <label for="email">Email: </label>
+                    <input type="email" id="email" name="email" class="login_input" required>
+
+                    <label for="email">Email: </label>
+                    <input type="email" id="email" name="email" class="login_input" required>
+
                     <br><h4>Profile details</h4>
 
                     <label for="username">Username: </label>
@@ -86,9 +92,20 @@
             </form>
 
             <?php
-                if(isset($_POST['create'])){
-                    //Verify if no conflicting email, if it exists then redirect back here, else create the account and store credentials into $_SESSION variable and go to main page
-                    
+                if(isset($_POST['login'])){
+                    //Verify login credentials; if valid then redirect to main page and store login into $_SESSION variable, otherwise redirect back here
+                    $email = $_POST['email'];
+                    $password = $_POST['password'];
+
+                    $login_details = new create_acc();
+
+                    if($login_details->log_in($email, $password)){
+                        //Store login details in $_SESSION variable
+
+                        header("Location: mainpage.php");
+                        exit;
+                    }
+
                     //Only for testing purposes, put inside proper conditional parameters
                     header("Location: MAIN_page.php");
                     exit;

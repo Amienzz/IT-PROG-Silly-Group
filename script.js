@@ -14,3 +14,11 @@ function toggle(div){
         div.style.display = "none";
     }
 }
+
+function toggleInput(inputId, checkboxId) {
+    var inputField = document.getElementById(inputId);
+    var checkbox = document.getElementById(checkboxId);
+
+    inputField.style.display = (checkbox.checked) ? 'block' : 'none';
+    inputField.required = checkbox.checked;
+}

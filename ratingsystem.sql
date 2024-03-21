@@ -27,6 +27,10 @@ SET time_zone = "+00:00";
 -- Table structure for table `dish`
 --
 
+DROP DATABASE IF EXISTS ratingsystem;
+CREATE DATABASE IF NOT EXISTS ratingsystem;
+USE ratingsystem;
+
 CREATE TABLE `dish` (
   `dish_id` int(11) NOT NULL,
   `resto_id` int(11) NOT NULL,

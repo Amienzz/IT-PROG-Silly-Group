@@ -28,7 +28,7 @@ ul{
 }
 
 .textbox_border{
-    max-width: 400px;
+    max-width: 500px;
     margin: 0 auto;
     background-color: #55627c;
     padding: 20px;
@@ -78,15 +78,15 @@ button:hover {
     filter: brightness(0.8);
 }
 
-
-
-.mainrestodiv
-{
-    display:grid;
+.mainrestodiv {
+    width: 35%;
+    display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap:50px;
     border: 1px solid #8f8f8f;
+    padding: 0px;
+    background-color: rgba(255, 255, 255, 0.5);
 }
+
 
 .restodiv
 {
@@ -108,4 +108,18 @@ th, td {
 
 th {
     background-color: #313131;
+}
+
+.column_CRR{
+    padding: 10px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.create_restoreview{
+    display: flex;
+    content: "";
+    flex-direction: row;
+    margin: 0 10px;
+    text-align: center;
 }
