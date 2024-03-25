@@ -8,6 +8,8 @@
 </head>
 <body>
 <?php
+echo $_SESSION['email'];
+
 /** 
 // Include necessary PHP files and configurations
 

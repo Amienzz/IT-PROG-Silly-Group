@@ -15,6 +15,9 @@
 
     <?php
         error_reporting(E_ERROR | E_PARSE);
+        $resto = new resto();
+        $restoreviews = new RestaurantReviews();
+
         if(isset($_GET['action'])){
             $action = $_GET['action'];
 
@@ -22,10 +25,11 @@
                 case 'create':
                     echo "<div class='create_restoreview'>";
 
-                    $resto = new resto();
                     $data = $resto->get_resto_list();
 
-                    echo "<form class='column_CRR' method='post'>";      //Add action
+                    echo "<div class='column_CRR'>
+                    <form method='post' action='".$_SERVER['PHP_SELF']."'>
+                            <input type='hidden' name='CRR_result' value='a'>";
                     echo "  <h2>Review a Restaurant!</h2>
                             <label for='resto'>Choose a Restaurant:</label>
 
@@ -52,9 +56,8 @@
                             <br>
                             Write a Review:
                             <textarea name='review' rows='5' cols='60' required></textarea><br>
-                            <button>Submit</button><br>
-                            <a href='MAIN_page.php'><button>Return to Main Page</button></a>
-                        </form>";
+                            <button type='submit'>Submit</button>
+                        </form><a href='MAIN_page.php'><button>Return to Main Page</button></a></div>";
 
                     echo "<div class='column_CRR'>";
                     foreach($data as $row){
@@ -79,8 +82,6 @@
                     echo "<th>Review</th>";
                     echo "<th>Date reviewed</th></tr>";
 
-                    $restoreviews = new RestaurantReviews();
-                    $resto = new resto();
                     $data = $restoreviews->get_resto_review_list();
                     foreach($data as $row)
                     {
@@ -106,9 +107,7 @@
                     echo "<th>Date</th>";
                     echo "<th>Actions</th></tr>";
 
-                    $restoreviewsupdate = new RestaurantReviews();
-                    $data = $restoreviewsupdate->get_resto_review_list();
-                    $resto = new resto();
+                    $data = $restoreviews->get_resto_review_list();
                     foreach($data as $row)
                     {
                         echo "<tr>";
@@ -118,16 +117,15 @@
                         echo "<td>" . $row['resto_review_date'] . '<br>';
 
 
-                        echo '<td><form action="FUNC_RR.php" method="post">';
-                        echo '<input type="hidden" name="A" value="' . $row['resto_review_id'] . '">';
-                        echo '<button type="submit" name="Update">Update</button>';
+                        echo '<td><form action='.$_SERVER['PHP_SELF'].' method="get">';
+                        echo '<input type="hidden" name="update" value="' . $row['resto_review_id'] . '">';
+                        echo '<button type="submit">Update</button>';
                         echo '</form>';
 
-                        echo '<form action="FUNC_RR.php" method="post">';
-                        echo '<input type="hidden" name="A" value="' . $row['resto_review_id'] . '">';
-                        echo '<button type="submit" name="Delete">Delete</button>';
+                        echo '<form action='.$_SERVER['PHP_SELF'].' method="get">';
+                        echo '<input type="hidden" name="delete" value="' . $row['resto_review_id'] . '">';
+                        echo '<button type="submit">Delete</button>';
                         echo '</form>';
-
                         
                         echo "</tr>";
                     }
@@ -142,7 +140,7 @@
 
 
                         <div style='display: flex; justify-content: center;''>
-                            <form action='restaurantreview_result.php' method='post'>
+                            <form action='".$_SERVER['PHP_SELF']."' method='post'>
                                 <input type='checkbox' id='cb4' name='cb4' onclick='toggle(search_resto)' value='on'>
                                 <label for='cb4'>Restaurant</label>
 
@@ -157,7 +155,6 @@
 
                                 <div style='display: flex; flex-wrap: wrap;'>
                                     "; 
-                                $resto = new resto();
                                 $data = $resto->get_resto_list();
                                     
                     echo        "<div id='search_resto' class='textbox_border' style='display: none; margin: 20px;'>
@@ -208,11 +205,102 @@
                     echo "<a href='MAIN_page.php'><button>Return to Main Page</button></a>";
                     break;
                 case 'report':
+                    $data = $resto->get_resto_list();
 
+                    echo "<div id='report_restoreview' class='textbox_border'>
+                            <form class='textbox' method='post' action='".$_SERVER['PHP_SELF']."'>
+                                <input type='hidden' name='RRR_result' value='a'>
+                                Select a Restaurant:
+                                <select name='restoreview' required>
+                                    <option value='' selected disabled hidden>Select an option</option>";
+                                    foreach ($data as $row) {
+                                        echo "<option value='".$row['resto_id']."'>".$row['resto_name']."</option>";
+                                    }
+                    echo        "</select><br>
+                                <button type='submit'>Search Results</button>
+                            </form>
+                        </div>";
                     echo "<a href='MAIN_page.php'><button>Return to Main Page</button></a>";
                     break;
             }
-        } else
+        } else if (isset($_GET['update'])){
+                $restorev_id = $_GET['update'];
+                $review = $restoreviews->get_resto_review_given_id($restorev_id);
+                $restaurant = $resto->get_resto_list_given_id($review['resto_id']);
+
+                $rating_values = array("Excellent", "Good", "Average", "Fair", "Poor");
+
+                echo "<div id='update_restoreview' class='textbox_border'>
+                            <form class='textbox' method='post' action='".$_SERVER['PHP_SELF']."'>
+                                <input type='hidden' name='URR_result' value='".$restorev_id."'>
+                                Restaurant: ".$restaurant['resto_name']."<br>
+                                Rating: 
+                                <select name='rating' requiered>
+                                ";
+                                foreach($rating_values as $rating){
+                                    echo "<option value='".$rating."'";
+                                    if (strcmp(strtolower($rating), $review['resto_review_overall_rating']) == 0){
+                                        echo "selected";
+                                    }
+                                    echo ">".$rating."</option>";
+                                }               
+                echo            "</select><br>
+                                Review: <textarea name='review' rows='5' cols='50' required>".$review['resto_review_text']."</textarea><br>
+                                <button type='submit'>Update</button>
+                            </form>
+                      </div>
+                     <a href='MAIN_page.php'><button>Return to Main Page</button></a>";
+        } else if (isset($_GET['delete'])){
+            $resto_review = $restoreviews->get_resto_review_given_id($_GET['delete']);
+            $restaurant = $resto->get_resto_list_given_id($resto_review['resto_id']);
+            echo "<div class='textbox_border'>
+                    <form class='textbox' method='post' action='".$_SERVER['PHP_SELF']."'>
+                        <input type='hidden' name='DRR_result' value='".$_GET['delete']."'>
+                        Are you sure you want to delete the following review?<br><br>
+
+                        Restaurant: ".$restaurant['resto_name']."<br>
+                        Review Date: ".$resto_review['resto_review_date']."<br>
+                        Rating: ".$resto_review['resto_review_overall_rating']."<br>
+                        Review: ".$resto_review['resto_review_text']."<br>
+                        
+                        <div><button name='DRR_input' type='submit' value='cancel'>Cancel</button>
+                        <button name='DRR_input' type='submit' value='delete' style='background-color: red;' >Delete</button></div>
+                    </form>
+                  </div>";
+        } else if (isset($_POST['CRR_result'])){
+            $resto_id = $_POST['resto'];
+            //$user_id = $_SESSION['user_id'];
+            $resto_review_overall_rating = $_POST['rating'];
+            $resto_review_text = $_POST['review'];
+        
+            //Remove after fixing $_SESSION
+            $user_id = 1;
+
+            if ($restoreviews->add_resto_reviews($resto_id, $user_id, $resto_review_overall_rating, $resto_review_text) == 100){
+                //TODO: Frontend shenanigans
+                echo "WORK";
+             } else echo "FAIL";
+        } else if (isset($_POST['URR_result'])){
+            $restorev_id = $_POST['URR_result'];
+            $rating = $_POST['rating'];
+            $review = $_POST['review'];
+
+            if ($restoreviews->modify_resto_reviews($restorev_id, $rating, $review) == 100){
+                //TODO: Frontend shenanigans
+                echo "WORK";
+            } else echo "FAIL";
+        } else if (isset($_POST['DRR_result'])){
+            if (strcmp($_POST['DRR_input'], "delete") == 0){
+                if($restoreviews->delete_resto_reviews($_POST['DRR_result']) == 100){
+                    //TODO: Frontend shenanigans
+                    echo "Deleted!";
+                } else echo "FAIL";
+            } else {
+                header("Location: MAIN_page.php");
+            }
+        } else if (isset($_POST['RRR_result'])){
+            //TODO: Implement report generation
+        }
     ?>
 
     <script src="script.js"></script>

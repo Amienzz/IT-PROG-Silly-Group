@@ -1,3 +1,7 @@
+<?php
+    include_once 'BE_Account.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,9 +33,20 @@
             <?php
                 if(isset($_POST['login'])){
                     //Verify login credentials; if valid then redirect to main page and store login into $_SESSION variable, otherwise redirect back here
-                    
-                    //Only for testing purposes, put inside proper conditional parameters
-                    header("Location: MAIN_page.php");
+                    $account = new create_acc();
+
+                    $email = $_POST['email'];
+                    $pass = $_POST['password'];
+
+                    if ($account->log_in($email, $pass) == 1){
+                        session_start();
+                        $_SESSION['email'] = $email;
+                        //Add more details to $_SESSION
+
+                        header("Location: MAIN_page.php");
+                    } else {
+                        echo "<p style='color: red;'>Login invalid</p>";
+                    }
                     exit;
                 }
             ?>
