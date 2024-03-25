@@ -10,6 +10,9 @@
 
     <div id="search" style="display: none;">
         <h2>Create a Dish Review!</h2>
+        fuck
+        fuck
+        fuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuckfuck
         <form action="FUNC_Search.php" method="post">
             <label for="dish_name">Find a User! (Backend connect logic pls):</label>
             <select id="dish_name">
