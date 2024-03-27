@@ -38,7 +38,7 @@
                     $email = $_POST['email'];
                     $pass = $_POST['password'];
 
-                    if ($account->log_in($email, $pass) == 1){
+                    if ($account->log_in($email, $pass)){
                         session_start();
                         $_SESSION['email'] = $email;
                         //Add more details to $_SESSION

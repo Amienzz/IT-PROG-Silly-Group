@@ -1,6 +1,7 @@
 <?php
     include_once 'BE_RestaurantReviews.php';
     include_once 'BE_Restaurant.php';
+    include_once 'BE_Account.php';
 ?>
 
 <html>
@@ -14,7 +15,7 @@
     <header class="taskbar"></header>
 
     <?php
-        error_reporting(E_ERROR | E_PARSE);
+        //error_reporting(E_ERROR | E_PARSE);
         $resto = new resto();
         $restoreviews = new RestaurantReviews();
 
@@ -138,9 +139,9 @@
                         <h2>Search for reviews</h2><br>
                         <h4>Fill out at least one field. Leave any unknown fields blank.</h4><br>
 
-
                         <div style='display: flex; justify-content: center;''>
                             <form action='".$_SERVER['PHP_SELF']."' method='post'>
+                                <input type='hidden' name='SRR_result' value='a'>
                                 <input type='checkbox' id='cb4' name='cb4' onclick='toggle(search_resto)' value='on'>
                                 <label for='cb4'>Restaurant</label>
 
@@ -164,7 +165,7 @@
                                             ";
                                             
                                             foreach($data as $row){
-                                                echo "<option value='". $row['resto_name']. "'>". $row['resto_name']. "</option>";
+                                                echo "<option value='". $row['resto_id']. "'>". $row['resto_name']. "</option>";
                                             }
                     echo                "</select>
                                     </div>
@@ -188,10 +189,10 @@
                                 
                                     <div id ='search_date' class='textbox_border' style='display: none; margin: 20px;'>
                                         <label for='start_date'>Start Date</label><br>
-                                        <input type='date' id='start_date' required><br><br>
+                                        <input type='date' id='start_date' name='start_date'><br><br>
 
                                         <label for='end_date'>End Date<label><br>
-                                        <input type='date' id='end_date' required><br>
+                                        <input type='date' id='end_date' name='end_date'><br>
                                     </div>
                                 </div>
                                 
@@ -266,6 +267,7 @@
                         <div><button name='DRR_input' type='submit' value='cancel'>Cancel</button>
                         <button name='DRR_input' type='submit' value='delete' style='background-color: red;' >Delete</button></div>
                     </form>
+
                   </div>";
         } else if (isset($_POST['CRR_result'])){
             $resto_id = $_POST['resto'];
@@ -298,6 +300,46 @@
             } else {
                 header("Location: MAIN_page.php");
             }
+        } else if (isset($_POST['SRR_result'])){
+            if (isset($_POST['cb1']))
+                $username = $_POST['username'];
+            else $username = -1;
+
+            if (isset($_POST['cb2']))
+                $rating = strtolower($_POST['rating']);
+            else $rating = "";
+
+            if (isset($_POST['cb3'])){
+                if (strlen($_POST['start_date']))
+                    $startdate = $_POST['start_date'];
+                else $startdate = "";
+
+                if (strlen($_POST['end_date']))
+                    $enddate = $_POST['end_date'];
+                else $enddate = "";
+            } else {
+                $startdate = "";
+                $enddate = "";
+            }
+
+            if (isset($_POST['cb4']))
+                $resto_id = $_POST['search_restaurant'];
+            else $resto_id = -1;
+
+            $data = $restoreviews->get_resto_review_given_option($resto_id, $username, $rating, $startdate, $enddate);
+            echo "<h3>Search Results</h3>";
+            foreach($data as $row){
+                echo "<div class='textbox_border'>
+                        <form class='textbox'>
+                            Restaurant: ".$row['resto_id']."<br>
+                            User: ".$row['user_id']."<br>
+                            Date: ".$row['resto_review_date']."<br>
+                            Rating: ".$row['resto_review_overall_rating']."<br>
+                            Review: ".$row['resto_review_text']."<br>
+                    </form></div><br>";
+            }
+
+            echo "<a href='MAIN_page.php'><button>Return to Main Page</button></a>";
         } else if (isset($_POST['RRR_result'])){
             //TODO: Implement report generation
         }

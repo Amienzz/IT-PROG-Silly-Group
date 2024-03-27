@@ -86,6 +86,82 @@ class RestaurantReviews extends DatabaseConn{
         }
         return $all_data;
     }
+
+    public function get_resto_review_given_option($restaurant_id, $user_id, $rating, $startdate, $enddate){
+        try
+        {
+            $is2nd = false; // Initialize to false
+
+            $statement = "SELECT * FROM resto_review WHERE ";
+            if ($restaurant_id != -1)
+            {
+                $statement = $statement . "resto_id = " . $restaurant_id;
+                $is2nd = true; // Update $is2nd if condition is met
+            }
+            if ($rating != "")
+            {
+                if ($is2nd)
+                {
+                    $statement = $statement . " AND ";
+                }
+                else
+                {
+                    $is2nd = true;
+                }
+                $statement = $statement . "resto_review_overall_rating = '" . $rating . "'";
+            }
+            if ($startdate != "")
+            {
+                if ($is2nd)
+                {
+                    $statement = $statement . " AND ";
+                }
+                else
+                {
+                    $is2nd = true;
+                }
+                $statement = $statement . "resto_review_date >= '" . $startdate . "'";
+            }
+            if ($enddate != "")
+            {
+                if ($is2nd)
+                {
+                    $statement = $statement . " AND ";
+                }
+                else
+                {
+                    $is2nd = true;
+                }
+                $statement = $statement . "resto_review_date <= '" . $enddate . "'";
+            }
+
+            if ($user_id != -1)
+            {
+                if ($is2nd)
+                {
+                    $statement = $statement . " AND ";
+                }
+                else
+                {
+                    $is2nd = true;
+                }
+                $statement = $statement . "user_id = " . $user_id;
+            }
+
+            $result = mysqli_query($this->conn, $statement);
+            $all_data = array();
+            while ($row = $result->fetch_assoc())
+            {
+                $all_data[] = $row;
+            }
+            return $all_data;
+        }
+        catch (Exception $e)
+        {
+            return 0;
+        }
+    }
+
 }
 
 
