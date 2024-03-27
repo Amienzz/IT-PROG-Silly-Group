@@ -128,22 +128,15 @@ $bio = $P->getBio();*/
 <!--Review dish div-->
 <div id="review_dish" style="display: none;">
     <main>
+
+    
         
         <form action="FUNC_DR.php" method="get">
-            <input type="hidden" name="action" value="create">
-            <button class="mainstyle" onclick="handleButtonClick('create')">Create a Dish Review</button>
-        </form>
 
-        <form action="FUNC_DR.php" method="get">
-            <input type="hidden" name="action" value="view">
-            <button onclick="handleButtonClick('view')">View, Update, or Modify Dish Review</button>
+            <button class="mainstyle" type="submit" name="action" value="create">Create a Dish Review</button><br>
+            <button class="mainstyle" type="submit" name="action" value="updatedelete">Update, or Modify Dish Review</button><br>
+            <button class="mainstyle" type="submit" name="action" value="search">Search a Dish Review</button><br>
         </form>
-
-        <form action="FUNC_DR.php" method="get">
-            <input type="hidden" name="action" value="search">
-            <button onclick="handleButtonClick('search')">Search a Dish Review</button>
-        </form>
-
         <button onclick="toggle(review_dish); toggle(mainpage)">Return to main menu</button><br>
     </main>
 </div>
