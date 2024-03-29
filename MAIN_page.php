@@ -78,7 +78,7 @@ $bio = $P->getBio();*/
 
         <!-- Any account functions -->
         <button class="mainstyle" onclick="toggle(profile); toggle(mainpage)">Account Settings</button><br>
-        <button class="mainstyle" onclick="toggle(search_account); toggle(mainpage)">Search Account</button><br>
+        <button class="mainstyle" onclick="toggle(search); toggle(mainpage)">Search Account</button><br>
         <button class="mainstyle" onclick="window.location.href='index.php'">Logout</button><br>
     </main>
 </div>
@@ -197,21 +197,13 @@ $bio = $P->getBio();*/
     </main>
 </div>
 
-<!--Search Account div-->
-<div id="search_account" style="display: none;">
+<!--Search Users div-->
+<div id="search" style="display: none;">
     <main>
-        <form action = "FUNC_Search.php"> 
-            <label for="gender">Gender: </label>
-            <select id="gender" name="gender">  
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                 <option value="Non-binary">Non-binary</option>
-                <option value="Prefer not to say">Prefer not to say</option> 
-            </select>
-            <br>
-            <button onclick="">Search Account</button>
-        </form>
-        <button onclick="toggle(search_account); toggle(mainpage)">Return to Main Menu</button>
+        <form action="FUNC_Search.php" method="get">
+            <button class="mainstyle" type="submit" name="action" value="search_users">Search All Users</button><br>
+
+        <button onclick="toggle(search_users); toggle(mainpage)">Return to Main Menu</button><br>
     </main>
 </div>
 
