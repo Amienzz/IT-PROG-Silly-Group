@@ -90,8 +90,26 @@
                     
                     break;
                 case 'search':
-
+                    echo "<div id='search_dish'>";
+                    echo "<table><tr>";
+                    echo "<th>Dish ID</th>";
+                    echo "<th>Dish Name</th>";
+                    echo "<th>Dish Price</th>";
+                    echo "<th>Dish Category</th>";
+                
+                    $data = $Dish->get_dish_list();
+                    foreach($data as $row) {
+                        echo "<tr>";
+                        echo "<td>" . $row['dish_id'] . "</td>";
+                        echo "<td>" . $row['dish_name'] . "</td>";
+                        echo "<td>" . $row['dish_price'] . "</td>";
+                        echo "<td>" . $row['dish_category'] . "</td>";
+                        echo "</tr>";
+                    }
+                    echo "</table></div>";
+                    echo "<a href='MAIN_page.php'><button>Return to Main Page</button></a>";
                     break;
+                
             }
         } else if (isset($_POST['CRR_result'])){
             $resto_review = new RestaurantReviews();
@@ -114,12 +132,8 @@
 </body>
 </html>
 
-
-
-
 <?php
 
-    
     if(isset($_POST['A'])) //if the form name is A in the main page this will be executed(updating the dish)
     {
 
@@ -161,6 +175,5 @@
         $user_id = $_POST['user_id'];
         $dish->get_dish_list_given_dish_category($user_id);
     }
-
 
 ?>
