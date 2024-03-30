@@ -123,3 +123,25 @@ th {
     margin: 0 10px;
     text-align: center;
 }
+
+.mainstyle {
+    width: 250px; 
+    height: 40px; 
+    padding: 10px; 
+    font-size: 16px;    
+    margin-bottom: 10px; 
+    cursor: pointer; 
+    border: none; 
+    background-color: #52bd52; 
+    color: #fff; 
+    border-radius: 5px; 
+}
+.mainstyle:hover {
+    background-color: #3c6444; 
+}
+
+.button-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}

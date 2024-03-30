@@ -55,7 +55,7 @@
                         $_SESSION['birthday'] = $data['birthday'];
                         $_SESSION['user_id'] = $data['user_id'];
                         $_SESSION['username'] = $data['username'];
-                        $_SESSION['description'] = $data['description'];
+                        $_SESSION['bio'] = $data['bio'];
                         $_SESSION['account_type'] = $data['account_type'];
                         
                         header("Location: MAIN_page.php");
@@ -89,10 +89,10 @@
                     
                     <label for="gender">Gender: </label>
                     <select id="gender" name="gender" class = "login_input" style="width: 45%;">  
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Non-binary">Non-binary</option>
-                        <option value="Prefer not to say">Prefer not to say</option> 
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="non-binary">Non-binary</option>
+                        <option value="unknown">Prefer not to say</option> 
                     </select>
 
                     <label for="email">Email: </label>
@@ -107,7 +107,7 @@
                     <input type="password" class="login_input" name="password_c" required>
 
                     <label for="account_type">Account type:</label><br>
-                    <input type="radio" id="user" name="acc_type" value="user" required>
+                    <input type="radio" id="user" name="acc_type" value="regular" required>
                     <label for="user">User</label>
                     <input type="radio" id="business" name="acc_type" value="business" required>
                     <label for="business">Business</label>
@@ -119,25 +119,40 @@
             <button onclick="hide(this); show(login)" type="submit" style="background-color: red;">Cancel</button>
             <?php
                 if(isset($_POST['create'])){
-                    if($account->isEmail_taken($_POST['email_c']) == 0){
+                    if($account->isEmail_taken($_POST['email_c']) == 0 && $account->isUsernname_Taken($_POST['username']) == 0){
                         $email = $_POST['email_c'];
                         $password = $_POST['password_c'];
                         $firstname = $_POST['first_name'];
-                        $middleinitial = $_POST['middle-initial'];
+                        $middleinitial = $_POST['middle_initial'];
                         $lastname = $_POST['last_name'];
                         $birthday = $_POST['birthday'];
                         $gender = $_POST['gender'];
                         $username = $_POST['username'];
                         $acctype = $_POST['acc_type'];
                         if ($account->register_user($firstname, $lastname, $middleinitial, $gender, $birthday, $email, $username, $password, "", $acctype)){
+                            session_start();
+
+                            $_SESSION['email'] = $email;
+                            $_SESSION['first_name'] = $firstname;
+                            $_SESSION['middle_initial'] = $middleinitial;
+                            $_SESSION['last_name'] = $lastname;
+                            $_SESSION['gender'] = $gender;
+                            $_SESSION['birthday'] = $birthday;
+                            $_SESSION['user_id'] = $account->searchEmail($email)['user_id'];
+                            $_SESSION['username'] = $username;
+                            $_SESSION['bio'] = "";
+                            $_SESSION['account_type'] = $acctype;
+
                             header("Location: MAIN_page.php");
                             exit;
                         } else {
                             echo "<p style='color: red;'>There was an unexpected issue. Please try again.</p>";
                         }
                         exit;
-                    } else {
+                    } else if ($account->isEmail_taken($_POST['email_c'])){
                         echo "<p style='color: red;'>Email already taken</p>";
+                    } else {
+                        echo "<p style='color: red;'>Username already taken</p>";
                     }
                     exit;
                 }

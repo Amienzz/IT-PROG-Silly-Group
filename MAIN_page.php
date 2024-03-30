@@ -27,39 +27,19 @@ session_start();
     </p>
 </div>
 
-<style>
-    .mainstyle {
-        width: 250px; 
-        height: 40px; 
-        padding: 10px; 
-        font-size: 16px;    
-        margin-bottom: 10px; 
-        cursor: pointer; 
-        border: none; 
-        background-color: #52bd52; /
-        color: #fff; 
-        border-radius: 5px; 
-    }
-    .mainstyle:hover {
-        background-color: #3c6444; 
-    }
-
-    .button-container {
-        display: flex;
-        justify-content: center; /* Center horizontally */
-        align-items: center; /* Center vertically */
-    }
-</style>
-
 <!-- Main page div -->
 <div id="mainpage">
     <main>
-        <!-- User account functions -->
-        <button class="mainstyle" onclick="toggle(review_restaurant); toggle(mainpage)">Review the restaurant</button><br>
-        <button class="mainstyle" onclick="toggle(review_dish); toggle(mainpage)">Review a dish</button><br>
-
-        <!-- Business account functions -->
-        <button class="mainstyle" onclick="toggle(dishes); toggle(mainpage)">Dishes [SERVERSIDE]</button><br>
+        
+        <?php if (strcmp($_SESSION['account_type'], "regular") == 0){
+            //User account functions
+            echo "<button class='mainstyle' onclick='toggle(review_restaurant); toggle(mainpage)'>Review the restaurant</button><br>
+                  <button class='mainstyle' onclick='toggle(review_dish); toggle(mainpage)'>Review a dish</button><br>";
+        } else if (strcmp($_SESSION['account_type'], "business") == 0){
+            //Business account functions
+            echo "<button class='mainstyle' onclick='toggle(dishes); toggle(mainpage)'>Dishes [SERVERSIDE]</button><br>";
+            echo "<button class='mainstyle' onclick='toggle(brr); toggle(mainpage)' style='height: auto;'>Sort Reviews of your<br>Account & Dishes</button><br>";
+        }?>
 
         <!-- Any account functions -->
         <button class="mainstyle" onclick="toggle(profile); toggle(mainpage)">Account Settings</button><br>
@@ -130,6 +110,18 @@ session_start();
         </form>
 
         <button onclick="toggle(dishes); toggle(mainpage)">Return to Main Menu</button><br>
+    </main>
+</div>
+
+<!--Reviews Business Side-->
+<div id="brr" style="display: none;">
+    <main>
+        <form action="XMLAscMP_RR.php"><button type="submit" class="mainstyle" style="height: auto;">Ascending<br>Restaurant Reviews</button></form>
+        <form action="XMLDescMP_RR.php"><button type="submit" class="mainstyle" style="height: auto;">Descending<br>Restaurant Reviews</button></form>
+        <form action="XMLAscMP.php"><button type="submit" class="mainstyle">Ascending Dish Reviews</button></form>
+        <form action="XMLDescMP.php"><button type="submit" class="mainstyle">Descending Dish Reviews</button></form>
+
+        <button onclick="toggle(brr); toggle(mainpage)">Return to Main Menu</button><br>
     </main>
 </div>
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resto_reviews>
+  <resto_review>
+    <resto_review_id>5</resto_review_id>
+    <resto_review_overall_rating>good</resto_review_overall_rating>
+    <resto_review_date>2024-02-23 09:02:57</resto_review_date>
+    <resto_id>5</resto_id>
+    <user_id>1</user_id>
+  </resto_review>
+  <resto_review>
+    <resto_review_id>6</resto_review_id>
+    <resto_review_overall_rating>good</resto_review_overall_rating>
+    <resto_review_date>2024-02-23 09:05:50</resto_review_date>
+    <resto_id>5</resto_id>
+    <user_id>1</user_id>
+  </resto_review>
+  <resto_review>
+    <resto_review_id>7</resto_review_id>
+    <resto_review_overall_rating>poor</resto_review_overall_rating>
+    <resto_review_date>2024-02-23 09:07:36</resto_review_date>
+    <resto_id>5</resto_id>
+    <user_id>1</user_id>
+  </resto_review>
+</resto_reviews>

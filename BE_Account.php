@@ -1,6 +1,5 @@
 <?php
-include 'Back_database.php';
-include 'Back_database.php';
+include_once 'Back_database.php';
 ?>
  
  
@@ -9,22 +8,19 @@ include 'Back_database.php';
     {
         public function isUsernname_Taken($s_username)
         {
-            $smt = $this->conn->prepare("SELECT username FROM users WHERE username = ? ");
+            $smt = $this->conn->prepare("SELECT username FROM user WHERE username = ? ");
             $smt->bind_param("s",$s_username);
             $smt->execute();
  
  
             $result = $smt->get_result();
  
-            if($result === null) ///returns 1 if false
- 
-            if($result === null) ///returns 1 if false
+            if($result->num_rows != 0) ///returns 1 if false
             {
                 return 1;
             }
             else
             {
-                return 0;   /// returns 0 if true
                 return 0;   /// returns 0 if true
             }
         }
@@ -34,10 +30,9 @@ include 'Back_database.php';
             $smt->bind_param("s",$s_email);
             $smt->execute();
  
- 
             $result = $smt->get_result();
  
-            if($result === null) 
+            if($result->num_rows != 0) 
             {
                 return 1;
             }
@@ -59,15 +54,12 @@ include 'Back_database.php';
         }
         public function log_in($s_email, $s_password)
         {
-            $smt = $this->conn->prepare("SELECT email FROM user WHERE email = ? AND password = ? ");
-            $smt = $this->conn->prepare("SELECT email FROM user WHERE email = ? AND password = ? ");
+            $smt = $this->conn->prepare("SELECT email FROM user WHERE email = ? AND user_password = ? ");
             $smt->bind_param("ss",$s_email, $s_password);
             $smt->execute();
  
- 
             $result = $smt->get_result();
             $data = $result->fetch_assoc();
- 
  
             if($data)
             {
@@ -86,10 +78,10 @@ include 'Back_database.php';
         public function register_user($s_firstn, $s_last, $mid, $gender, $birthdate, $s_email, $s_username, $s_user_password, $s_bio, $account_type)
         {
             $date = $this->date_today();
-            $s_userid = $this->assignUID();
+            $i_userid = $this->assignUID();
  
-            $smt = $this->conn->prepare("INSERT INTO user VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $smt->bind_param("sssssssssssss", $s_firstn, $s_last, $mid, $gender, $birthdate, $s_userid, $s_email, $s_username, $s_user_password, $date, $s_username, $s_bio, $account_type);
+            $smt = $this->conn->prepare("INSERT INTO user (first_name, last_name, middle_initial, gender, birthday, user_id, email, username, user_password, registration_date, bio, account_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $smt->bind_param("sssssissssss", $s_firstn, $s_last, $mid, $gender, $birthdate, $i_userid, $s_email, $s_username, $s_user_password, $date, $s_bio, $account_type);
             try
             {
                 $smt->execute();
@@ -98,6 +90,7 @@ include 'Back_database.php';
             }
             catch(Exception $e)
             {
+                echo $e;
                 return 0;
             }
  
@@ -122,7 +115,7 @@ include 'Back_database.php';
         {
             try
             {
-                $stmt = $this->conn->prepare("SELECT first_name, last_name, middle_initial, gender, birthday, user_id, email, username, registration_date, description, account_type FROM user WHERE email = ?");
+                $stmt = $this->conn->prepare("SELECT first_name, last_name, middle_initial, gender, birthday, user_id, email, username, registration_date, bio, account_type FROM user WHERE email = ?");
                 $stmt->bind_param("s",$s_email);
                 $stmt->execute();
  
