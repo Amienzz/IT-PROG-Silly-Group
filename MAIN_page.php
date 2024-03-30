@@ -134,7 +134,7 @@ $bio = $P->getBio();*/
         <form action="FUNC_DR.php" method="get">
 
             <button class="mainstyle" type="submit" name="action" value="create">Create a Dish Review</button><br>
-            <button class="mainstyle" type="submit" name="action" value="updatedelete">Update, or Modify Dish Review</button><br>
+            <button class="mainstyle" type="submit" name="action" value="updatedelete">Update or Modify Dish Review</button><br>
             <button class="mainstyle" type="submit" name="action" value="search">Search a Dish Review</button><br>
         </form>
         <button onclick="toggle(review_dish); toggle(mainpage)">Return to main menu</button><br>
