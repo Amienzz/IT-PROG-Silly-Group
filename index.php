@@ -13,6 +13,11 @@
 <body>
     <header class="taskbar"></header>
 
+    <?php
+    $account = new create_acc();
+    error_reporting(E_ERROR | E_PARSE);
+    session_destroy();
+    ?>
     <main>
         <!--Login div-->
         <div id="login">
@@ -30,28 +35,36 @@
                 <button type="submit" name="login">Login</button>
             </form>
         
+            <button onclick="hide(this); show(create_account)">Don't have an account? Sign up now!</button>  
             <?php
                 if(isset($_POST['login'])){
                     //Verify login credentials; if valid then redirect to main page and store login into $_SESSION variable, otherwise redirect back here
-                    $account = new create_acc();
 
                     $email = $_POST['email'];
                     $pass = $_POST['password'];
 
                     if ($account->log_in($email, $pass)){
                         session_start();
+                        $data = $account->searchEmail($email); 
+                        
                         $_SESSION['email'] = $email;
-                        //Add more details to $_SESSION
-
+                        $_SESSION['first_name'] = $data['first_name'];
+                        $_SESSION['middle_initial'] = $data['middle_initial'];
+                        $_SESSION['last_name'] = $data['last_name'];
+                        $_SESSION['gender'] = $data['gender'];
+                        $_SESSION['birthday'] = $data['birthday'];
+                        $_SESSION['user_id'] = $data['user_id'];
+                        $_SESSION['username'] = $data['username'];
+                        $_SESSION['description'] = $data['description'];
+                        $_SESSION['account_type'] = $data['account_type'];
+                        
                         header("Location: MAIN_page.php");
                     } else {
                         echo "<p style='color: red;'>Login invalid</p>";
-                    }
+                    }                    
                     exit;
                 }
             ?>
-
-            <button onclick="hide(this); show(create_account)">Don't have an account? Sign up now!</button>  
         </div>
 
         <!--Create account div-->
@@ -63,16 +76,16 @@
                     <h4>Personal details</h4>
 
                     <label for="firstname">First Name: </label>
-                    <input type="text" class = "login_input" id="firstname" name="firstname" required>
+                    <input type="text" class = "login_input" name="first_name" required>
                     
                     <label for="middle_initial">Middle Initial: </label>
-                    <input type="text" class = "login_input" id="middle_initial" name="middle_initial" maxlength = "1" required>
+                    <input type="text" class = "login_input" name="middle_initial" maxlength = "1" required>
                     
                     <label for="last_name">Last Name: </label>
-                    <input type="text" class = "login_input" id="last_name" name="last_name" required>
+                    <input type="text" class = "login_input" name="last_name" required>
                     
                     <label for="birthday">Birthday: </label>
-                    <input type="date" class = "login_input" id="birthday" name="birthday" style="width: 45%" required>
+                    <input type="date" class = "login_input" name="birthday" style="width: 45%" required>
                     
                     <label for="gender">Gender: </label>
                     <select id="gender" name="gender" class = "login_input" style="width: 45%;">  
@@ -83,18 +96,15 @@
                     </select>
 
                     <label for="email">Email: </label>
-                    <input type="email" id="email" name="email" class="login_input" required>
-
-                    <label for="email">Email: </label>
-                    <input type="email" id="email" name="email" class="login_input" required>
+                    <input type="email" name="email_c" class="login_input" required>
 
                     <br><h4>Profile details</h4>
 
                     <label for="username">Username: </label>
-                    <input type="text" class = "login_input" id="username" name="username" required>
+                    <input type="text" class = "login_input" name="username" required>
 
                     <label for="password">Password: </label>
-                    <input type="password" class="login_input" id="password" name="password" required>
+                    <input type="password" class="login_input" name="password_c" required>
 
                     <label for="account_type">Account type:</label><br>
                     <input type="radio" id="user" name="acc_type" value="user" required>
@@ -106,28 +116,32 @@
                 <button type="submit" name="create">Create Account</button>
             </form>
 
+            <button onclick="hide(this); show(login)" type="submit" style="background-color: red;">Cancel</button>
             <?php
-                if(isset($_POST['login'])){
-                    //Verify login credentials; if valid then redirect to main page and store login into $_SESSION variable, otherwise redirect back here
-                    $email = $_POST['email'];
-                    $password = $_POST['password'];
-
-                    $login_details = new create_acc();
-
-                    if($login_details->log_in($email, $password)){
-                        //Store login details in $_SESSION variable
-
-                        header("Location: mainpage.php");
+                if(isset($_POST['create'])){
+                    if($account->isEmail_taken($_POST['email_c']) == 0){
+                        $email = $_POST['email_c'];
+                        $password = $_POST['password_c'];
+                        $firstname = $_POST['first_name'];
+                        $middleinitial = $_POST['middle-initial'];
+                        $lastname = $_POST['last_name'];
+                        $birthday = $_POST['birthday'];
+                        $gender = $_POST['gender'];
+                        $username = $_POST['username'];
+                        $acctype = $_POST['acc_type'];
+                        if ($account->register_user($firstname, $lastname, $middleinitial, $gender, $birthday, $email, $username, $password, "", $acctype)){
+                            header("Location: MAIN_page.php");
+                            exit;
+                        } else {
+                            echo "<p style='color: red;'>There was an unexpected issue. Please try again.</p>";
+                        }
                         exit;
+                    } else {
+                        echo "<p style='color: red;'>Email already taken</p>";
                     }
-
-                    //Only for testing purposes, put inside proper conditional parameters
-                    header("Location: MAIN_page.php");
                     exit;
                 }
             ?>
-
-            <button onclick="hide(this); show(login)" type="submit" style="background-color: red;">Cancel</button>
         </div>
     </main>
 

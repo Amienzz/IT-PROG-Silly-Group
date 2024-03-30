@@ -8,30 +8,13 @@
 </head>
 <body>
 <?php
-echo $_SESSION['email'];
-
-/** 
-// Include necessary PHP files and configurations
-
-// Assuming the user_management.php file is included
-include_once 'user_management.php';
-
-// Instantiate the profile class
-$P = new profile();
-
-// Retrieve the username from the session
 session_start();
-$loggedInUser = isset($_SESSION['loggedInUser']) ? $_SESSION['loggedInUser'] : '';
-$P->username = $loggedInUser;
-
-// Get bio from the profile
-$bio = $P->getBio();*/
 ?> 
 
 <header class="taskbar"></header>
-<!--
-<h1>Welcome, <?php echo $loggedInUser; ?>!</h1>
-<h1>Bio: <?php echo $bio; ?> </h1>
+
+<h1>Welcome, <?php echo $_SESSION['username']; ?>!</h1>
+<h1>Bio: <?php echo $_SESSION['description']; ?> </h1>
 
 <div>
     <h1>Restaurant</h1>
@@ -42,7 +25,7 @@ $bio = $P->getBio();*/
         <br>
         Operating Hours: 10:00 AM - 8:00 PM Everyday
     </p>
-</div>-->
+</div>
 
 <style>
     .mainstyle {

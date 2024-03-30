@@ -15,7 +15,8 @@
     <header class="taskbar"></header>
 
     <?php
-        //error_reporting(E_ERROR | E_PARSE);
+        error_reporting(E_ERROR | E_PARSE);
+        session_start();
         $resto = new resto();
         $restoreviews = new RestaurantReviews();
 
@@ -62,14 +63,16 @@
 
                     echo "<div class='column_CRR'>";
                     foreach($data as $row){
-                        echo "<form action='". $_SERVER['PHP_SELF']. "' class='textbox_border' method='get'><div class='textbox'>";
-                        echo "Name: " . $row['resto_name'] . '<br>';
-                        echo "Description: " . $row['resto_description'] . '<br>';
-                        echo "E-mail: ". $row['resto_email'] . '<br>';
-                        echo "Website Link: " . $row['resto_websitelink'] . '<br>';
-                        echo "<input type='hidden' name='resto_id' value='". $row['resto_id']. "'>";
-                        echo "<button type='submit' name='action' value='create'>Select</button>";
-                        echo "</div></form><br>";
+                        if ($row['user_id'] == $_SESSION['user_id']){
+                            echo "<form action='". $_SERVER['PHP_SELF']. "' class='textbox_border' method='get'><div class='textbox'>";
+                            echo "Name: " . $row['resto_name'] . '<br>';
+                            echo "Description: " . $row['resto_description'] . '<br>';
+                            echo "E-mail: ". $row['resto_email'] . '<br>';
+                            echo "Website Link: " . $row['resto_websitelink'] . '<br>';
+                            echo "<input type='hidden' name='resto_id' value='". $row['resto_id']. "'>";
+                            echo "<button type='submit' name='action' value='create'>Select</button>";
+                            echo "</div></form><br>";
+                        }
                     }
                     echo "</div></div>";
                     break;
