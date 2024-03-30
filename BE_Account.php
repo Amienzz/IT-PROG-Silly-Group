@@ -1,6 +1,8 @@
 <?php
 include 'Back_database.php';
+include 'Back_database.php';
 ?>
+ 
  
 <?php
      class create_acc extends DatabaseConn
@@ -11,7 +13,10 @@ include 'Back_database.php';
             $smt->bind_param("s",$s_username);
             $smt->execute();
  
+ 
             $result = $smt->get_result();
+ 
+            if($result === null) ///returns 1 if false
  
             if($result === null) ///returns 1 if false
             {
@@ -20,13 +25,15 @@ include 'Back_database.php';
             else
             {
                 return 0;   /// returns 0 if true
+                return 0;   /// returns 0 if true
             }
         }
         public function isEmail_taken($s_email)////checks if the email is taken
         {
-            $smt = $this->conn->prepare("SELECT email FROM users WHERE email = ? ");
+            $smt = $this->conn->prepare("SELECT email FROM user WHERE email = ? ");
             $smt->bind_param("s",$s_email);
             $smt->execute();
+ 
  
             $result = $smt->get_result();
  
@@ -53,11 +60,14 @@ include 'Back_database.php';
         public function log_in($s_email, $s_password)
         {
             $smt = $this->conn->prepare("SELECT email FROM user WHERE email = ? AND password = ? ");
+            $smt = $this->conn->prepare("SELECT email FROM user WHERE email = ? AND password = ? ");
             $smt->bind_param("ss",$s_email, $s_password);
             $smt->execute();
  
+ 
             $result = $smt->get_result();
             $data = $result->fetch_assoc();
+ 
  
             if($data)
             {
@@ -73,16 +83,18 @@ include 'Back_database.php';
             $date = date('Y-m-d'); // Format: YYYY-MM-DD
             return $date;
         }
-        public function register_user($s_firstn, $s_last, $mid, $gender, $birthdate, $s_userid, $s_email, $s_username, $s_user_password, $s_bio, $account_type)
+        public function register_user($s_firstn, $s_last, $mid, $gender, $birthdate, $s_email, $s_username, $s_user_password, $s_bio, $account_type)
         {
-            $date = date_today();
+            $date = $this->date_today();
+            $s_userid = $this->assignUID();
  
-            $smt = $this->conn->prepare("INSERT INTO user (first_name, last_name, middle_initial, gender, birthday,user_id, email, username,user_password,registration_date,bio,account_type) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            $smt->bind_param("ssssssssssss", $s_firstn, $s_last, $mid, $gender, $birthdate,$s_userid,$s_email, $s_username, $s_user_password, $date, $s_bio, $account_type);
+            $smt = $this->conn->prepare("INSERT INTO user VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $smt->bind_param("sssssssssssss", $s_firstn, $s_last, $mid, $gender, $birthdate, $s_userid, $s_email, $s_username, $s_user_password, $date, $s_username, $s_bio, $account_type);
             try
             {
                 $smt->execute();
                 $smt->close(); 
+                return 1;
             }
             catch(Exception $e)
             {
@@ -151,19 +163,27 @@ include 'Back_database.php';
             }
         }
 
-        public function get_account_list()
+        public function assignUID()
         {
-            $stmt = $this->conn->prepare("SELECT * FROM user");
+            $stmt = $this->conn->prepare("SELECT MAX(user_id) AS max_user_id FROM user");
             $stmt->execute();
             $result = $stmt->get_result();
-            $all_data = array();
-            while ($row = $result->fetch_assoc())
+        
+            // Check if there are existing user_ids
+            if ($result->num_rows == 1) 
             {
-                $all_data[] = $row;
+                $row = $result->fetch_assoc();
+                $maxUserId = $row['max_user_id'];
+        
+                // If there are existing user_ids, increment the maximum user_id
+                $nextUserId = $maxUserId + 1;
+            } else 
+            {
+                // If there are no existing user_ids, start from 1
+                $nextUserId = 1;
             }
-    
-            return $all_data;
-        }
 
+            return $nextUserId;
+        }
     }       
 ?>

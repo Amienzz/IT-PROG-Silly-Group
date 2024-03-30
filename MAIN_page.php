@@ -8,28 +8,13 @@
 </head>
 <body>
 <?php
-/** 
-// Include necessary PHP files and configurations
-
-// Assuming the user_management.php file is included
-include_once 'user_management.php';
-
-// Instantiate the profile class
-$P = new profile();
-
-// Retrieve the username from the session
 session_start();
-$loggedInUser = isset($_SESSION['loggedInUser']) ? $_SESSION['loggedInUser'] : '';
-$P->username = $loggedInUser;
-
-// Get bio from the profile
-$bio = $P->getBio();*/
 ?> 
 
 <header class="taskbar"></header>
-<!--
-<h1>Welcome, <?php echo $loggedInUser; ?>!</h1>
-<h1>Bio: <?php echo $bio; ?> </h1>
+
+<h1>Welcome, <?php echo $_SESSION['username']; ?>!</h1>
+<h1>Bio: <?php echo $_SESSION['description']; ?> </h1>
 
 <div>
     <h1>Restaurant</h1>
@@ -40,7 +25,7 @@ $bio = $P->getBio();*/
         <br>
         Operating Hours: 10:00 AM - 8:00 PM Everyday
     </p>
-</div>-->
+</div>
 
 <style>
     .mainstyle {
@@ -86,39 +71,12 @@ $bio = $P->getBio();*/
 <!--Review Restaurant div-->
 <div id="review_restaurant" style="display: none;">
     <main>
-        <form action="FUNC_RR.php" name="review" method="get">
-            <input type="hidden" name="create" value="create">
-            <button type="submit">Review the Restaurant</button>
-        </form>
-
         <form action="FUNC_RR.php" method="get">
-            <input type="hidden" name="list" value="list">
-            <button type="submit">List Restaurant Reviews</button>
-        </form>
-
-        <form action="FUNC_RR.php" method="get">
-            <input type="hidden" name="update" value="update">
-            <button type="submit">Update Restaurant Reviews</button>
-        </form>
-
-        <form action="FUNC_RR.php" method="get">
-            <input type="hidden" name="delete" value="delete">
-            <button type="submit">Delete Restaurant Reviews</button>
-        </form>
-
-        <form action="FUNC_RR.php" method="get">
-            <input type="hidden" name="action" value="view">
-            <button type="submit">View Restaurant Reviews</button>
-        </form>
-
-        <form action="FUNC_RR.php" method="get">
-            <input type="hidden" name="search" value="search">
-            <button type="submit">Search Restaurant Reviews</button>
-        </form>
-
-        <form action="FUNC_RR.php" method="get">
-            <input type="hidden" name="report" value="report">
-            <button type="submit">Restaurant Reviews Monthly Report</button>
+            <button class="mainstyle" type="submit" name="action" value="create">Review the Restaurant</button><br>
+            <button class="mainstyle" type="submit" name="action" value="list">List Restaurant Reviews</button><br>
+            <button class="mainstyle" type="submit" name="action" value="update_delete" style="height: auto;">Update/Delete<br>Own Restaurant Reviews</button><br>
+            <button class="mainstyle" type="submit" name="action" value="search">Search Restaurant Reviews</button><br>
+            <button class="mainstyle" type="submit" name="action" value="report" style="height: auto;">Restaurant Reviews<br>Monthly Report</button><br>
         </form>
 
         <button onclick="toggle(review_restaurant); toggle(mainpage)">Return to Main Menu</button><br>
