@@ -1,5 +1,6 @@
 <?php
     include_once 'BE_Account.php';
+    include_once 'BE_Restaurant.php';
 ?>
 
 <!DOCTYPE html>
@@ -15,13 +16,14 @@
 
     <?php
     $account = new create_acc();
+    $resto = new resto();
     error_reporting(E_ERROR | E_PARSE);
     session_destroy();
     ?>
     <main>
         <!--Login div-->
         <div id="login">
-            <form class="textbox_border" method="post">
+            <form class="textbox_border_nf" method="post">
                 <h3>Log in</h3>
 
                 <div class="textbox">
@@ -57,6 +59,14 @@
                         $_SESSION['username'] = $data['username'];
                         $_SESSION['bio'] = $data['bio'];
                         $_SESSION['account_type'] = $data['account_type'];
+
+                        if (strcmp($_SESSION['account_type'], "business") == 0){
+                            $data = $resto->get_resto_list_given_email($_SESSION['email']);
+                            if($data === 0)
+                                echo "<p style='color: red;'>An unexpected error occurred.</p>";
+                            else 
+                                $_SESSION['resto_id'] = $data['resto_id'];
+                        }
                         
                         header("Location: MAIN_page.php");
                     } else {
@@ -69,7 +79,7 @@
 
         <!--Create account div-->
         <div id="create_account" style="display: none;">
-            <form class="textbox_border" method="post">
+            <form class="textbox_border_nf" method="post">
                 <h3>Create an account!</h3>
 
                 <div class="textbox">
@@ -143,12 +153,17 @@
                             $_SESSION['bio'] = "";
                             $_SESSION['account_type'] = $acctype;
 
-                            header("Location: MAIN_page.php");
-                            exit;
+                            if (strcmp($acctype, "business") == 0){
+                                if ($resto->add_resto($_SESSION['user_id'], "", "", $_SESSION['email'], "") == 100){
+                                    $data = $resto->get_resto_list_given_email($_SESSION['email']);
+                                    $_SESSION['resto_id'] = $data['resto_id'];
+                                    header("Location: MAIN_page.php");
+                                } else echo "<p style='color: red;'>There was an unexpected issue. Please try again.</p>";
+                            } else
+                                header("Location: MAIN_page.php");
                         } else {
                             echo "<p style='color: red;'>There was an unexpected issue. Please try again.</p>";
                         }
-                        exit;
                     } else if ($account->isEmail_taken($_POST['email_c'])){
                         echo "<p style='color: red;'>Email already taken</p>";
                     } else {

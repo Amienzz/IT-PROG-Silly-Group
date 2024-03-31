@@ -27,9 +27,27 @@ ul{
     list-style: none;
 }
 
-.textbox_border{
+.grid_container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.grid_item {
     max-width: 500px;
     margin: 0 auto;
+}
+
+.textbox_border_nf{
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #55627c;
+    padding: 20px;
+    border-radius: 8px;
+
+}
+.textbox_border {
     background-color: #55627c;
     padding: 20px;
     border-radius: 8px;
@@ -41,12 +59,20 @@ ul{
     margin: 0 auto;
 }
 
-.textbox{
-    width: 80%;
+.textbox_border_nf button {
+    display: block;
     margin: 0 auto;
+}
+
+.textbox {
     text-align: left;
     line-height: 2em;
 }
+
+.textbox h3 {
+    text-align: center;
+}
+
 
 .login_input {
     width: 100%;
@@ -140,8 +166,12 @@ th {
     background-color: #3c6444; 
 }
 
-.button-container {
+.button_container {
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    justify-content: center; 
+    align-items: center;
+}
+
+.button_container form {
+    margin: 5px;
 }

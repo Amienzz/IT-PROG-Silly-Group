@@ -1,5 +1,6 @@
 <?php
 include_once 'back_Database.php';
+include_once 'BE_Account.php';
 ?>
 
 <?php
@@ -143,7 +144,7 @@ class RestaurantReviews extends DatabaseConn{
 
     }
 
-    public function get_resto_review_given_option($restaurant_id, $user_id, $rating, $startdate, $enddate){
+    public function get_resto_review_given_option($restaurant_id, $username, $rating, $startdate, $enddate){
         try
         {
             $is2nd = false; // Initialize to false
@@ -191,8 +192,11 @@ class RestaurantReviews extends DatabaseConn{
                 $statement = $statement . "resto_review_date <= '" . $enddate . "'";
             }
 
-            if ($user_id != -1)
+            if ($username != "")
             {
+                $account = new create_acc();
+                $uid = $account->searchUser($username);
+                
                 if ($is2nd)
                 {
                     $statement = $statement . " AND ";
@@ -201,7 +205,7 @@ class RestaurantReviews extends DatabaseConn{
                 {
                     $is2nd = true;
                 }
-                $statement = $statement . "user_id = " . $user_id;
+                $statement = $statement . "user_id = " . $uid['user_id'];
             }
 
             $result = mysqli_query($this->conn, $statement);
@@ -218,6 +222,33 @@ class RestaurantReviews extends DatabaseConn{
         }
     }
 
+    public function get_resto_review_list_average($resto_id)
+    {
+        try
+        {
+            $stmt = $this->conn->prepare("SELECT AVG(
+                CASE resto_review_overall_rating
+                    WHEN 'excellent' THEN 5
+                    WHEN 'good' THEN 4
+                    WHEN 'average' THEN 3
+                    WHEN 'fair' THEN 2
+                    WHEN 'poor' THEN 1
+                END
+            ) AS average_rating
+            FROM resto_review
+            WHERE resto_id = ?;");
+            $stmt->bind_param("i", $resto_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            $average_rating = $result->fetch_assoc();
+            return $average_rating;
+        }
+        catch (Exception $e)
+        {
+            return 0;
+        }
+    }
 }
 
 

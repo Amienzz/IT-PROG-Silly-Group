@@ -14,23 +14,11 @@ session_start();
 <header class="taskbar"></header>
 
 <h1>Welcome, <?php echo $_SESSION['username']; ?>!</h1>
-<h1>Bio: <?php echo $_SESSION['description']; ?> </h1>
-
-<div>
-    <h1>Restaurant</h1>
-    <p>Address: One Archers Place, 2311 Taft Ave, 
-        Malate, Manila, 1004 Metro Manila
-        <br>
-        Number: 111-1111
-        <br>
-        Operating Hours: 10:00 AM - 8:00 PM Everyday
-    </p>
-</div>
+<?php echo $_SESSION['bio'];?>
 
 <!-- Main page div -->
 <div id="mainpage">
     <main>
-        
         <?php if (strcmp($_SESSION['account_type'], "regular") == 0){
             //User account functions
             echo "<button class='mainstyle' onclick='toggle(review_restaurant); toggle(mainpage)'>Review the restaurant</button><br>
@@ -39,10 +27,11 @@ session_start();
             //Business account functions
             echo "<button class='mainstyle' onclick='toggle(dishes); toggle(mainpage)'>Dishes [SERVERSIDE]</button><br>";
             echo "<button class='mainstyle' onclick='toggle(brr); toggle(mainpage)' style='height: auto;'>Sort Reviews of your<br>Account & Dishes</button><br>";
+            echo "<button class='mainstyle' onclick='toggle(resto_settings); toggle(mainpage)'>Restaurant Settings</button><br>";
         }?>
 
         <!-- Any account functions -->
-        <button class="mainstyle" onclick="toggle(profile); toggle(mainpage)">Account Settings</button><br>
+        <form action="FUNC_Account.php"><button class="mainstyle" type="submit">Account Settings</button></form>
         <button class="mainstyle" onclick="toggle(search); toggle(mainpage)">Search Account</button><br>
         <button class="mainstyle" onclick="window.location.href='index.php'">Logout</button><br>
     </main>
@@ -66,7 +55,6 @@ session_start();
 <!--Review dish div-->
 <div id="review_dish" style="display: none;">
     <main>
-        
         <form action="FUNC_DR.php" method="get">
             <input type="hidden" name="action" value="create">
             <button class="mainstyle" onclick="handleButtonClick('create')">Create a Dish Review</button>
@@ -74,12 +62,12 @@ session_start();
 
         <form action="FUNC_DR.php" method="get">
             <input type="hidden" name="action" value="view">
-            <button onclick="handleButtonClick('view')">View, Update, or Modify Dish Review</button>
+            <button class="mainstyle" onclick="handleButtonClick('view')" style="height: auto">View, Update, or Modify<br>Dish Review</button>
         </form>
 
         <form action="FUNC_DR.php" method="get">
             <input type="hidden" name="action" value="search">
-            <button onclick="handleButtonClick('search')">Search a Dish Review</button>
+            <button class="mainstyle" onclick="handleButtonClick('search')">Search a Dish Review</button>
         </form>
 
         <button onclick="toggle(review_dish); toggle(mainpage)">Return to main menu</button><br>
@@ -95,18 +83,18 @@ session_start();
         </form>
 
         <form action="FUNC_Dish.php" method="get">
-            <input type="hidden" name="action" value="view">
-            <button type="submit">View & Update Dish</button>
+            <input type="hidden" name="action" value="update">
+            <button type="submit">Update a Dish</button>
+        </form>        
+
+        <form action="FUNC_Dish.php" method="get">
+            <input type="hidden" name="action" value="delete">
+            <button type="submit">Delete a Dish</button>
         </form>
 
         <form action="FUNC_Dish.php" method="get">
             <input type="hidden" name="action" value="search">
-            <button type="submit">Search Dish</button>
-        </form>
-
-        <form action="FUNC_Dish.php" method="get">
-            <input type="hidden" name="action" value="delete">
-            <button type="submit">Delete Dish</button>
+            <button type="submit">Search for a Dish</button>
         </form>
 
         <button onclick="toggle(dishes); toggle(mainpage)">Return to Main Menu</button><br>
@@ -125,25 +113,17 @@ session_start();
     </main>
 </div>
 
-<!--Profile div-->
-<div id="profile" style="display: none;">
+<!--Restaurant Settings div-->
+<div id="resto_settings" style="display: none;">
     <main>
-        <form action="FUNC_Profile.php" method="get">
-            <input type="hidden" name="action" value="username">
-            <button type="submit">Edit Username</button>
+        <form action="FUNC_Resto.php" method="get">
+            <button class="mainstyle" type="submit" name="action" value="name">Edit Restaurant Name</button><br>
+            <button class="mainstyle" type="submit" name="action" value="email">Edit Restaurant Email</button><br>
+            <button class="mainstyle" type="submit" name="action" value="link" style="height: auto;">Edit Restaurant<br>Website Link</button><br>
+            <button class="mainstyle" type="submit" name="action" value="description">Edit Restaurant Description</button><br>
         </form>
 
-        <form action="FUNC_Profile.php" method="get">
-            <input type="hidden" name="action" value="bio">
-            <button type="submit">Edit Bio</button>
-        </form>
-
-        <form action="FUNC_Profile.php" method="get">
-            <input type="hidden" name="action" value="number">
-            <button type="submit">Edit Number</button>
-        </form>
-
-        <button onclick="toggle(profile); toggle(mainpage)">Return to Main Menu</button><br>
+        <button onclick="toggle(resto_settings); toggle(mainpage)">Return to Main Menu</button><br>
     </main>
 </div>
 
@@ -153,7 +133,7 @@ session_start();
         <form action="FUNC_Search.php" method="get">
             <button class="mainstyle" type="submit" name="action" value="search_users">Search All Users</button><br>
 
-        <button onclick="toggle(search_users); toggle(mainpage)">Return to Main Menu</button><br>
+        <button onclick="toggle(search); toggle(mainpage)">Return to Main Menu</button><br>
     </main>
 </div>
 

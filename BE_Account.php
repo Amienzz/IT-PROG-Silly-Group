@@ -133,12 +133,35 @@ include_once 'Back_database.php';
                 return 0;
             }
         }
-        public function searchID($s_id) //getUser via ID
+        public function searchID($id) //getUser via ID
         {
             try
             {
-                $stmt = $this->conn->prepare("SELECT first_name, last_name, middle_initial,gender,birthday,user_id,email,username,registration_date,description,account_type FROM user WHERE user_id = ?");
-                $stmt->bind_param("s",$s_id);
+                $stmt = $this->conn->prepare("SELECT first_name, last_name, middle_initial,gender,birthday,user_id,email,username,registration_date,bio,account_type FROM user WHERE user_id = ?");
+                $stmt->bind_param("i",$id);
+                $stmt->execute();
+ 
+                $result = $stmt->get_result();
+                $data = array();
+ 
+                while( $row = $result->fetch_assoc())
+                {
+                    $data = $row;
+                }
+                return $data;
+            }
+            catch(Exception $e)
+            {
+                return 0;
+            }
+        }
+
+        public function searchUser($s_username) //getUser via username
+        {
+            try
+            {
+                $stmt = $this->conn->prepare("SELECT first_name, last_name, middle_initial,gender,birthday,user_id,email,username,registration_date,bio,account_type FROM user WHERE username = ?");
+                $stmt->bind_param("s",$s_username);
                 $stmt->execute();
  
                 $result = $stmt->get_result();
@@ -177,6 +200,41 @@ include_once 'Back_database.php';
             }
 
             return $nextUserId;
+        }
+
+        public function updateUser($firstname, $lastname, $middleinitial, $gender, $birthday, $email, $username, $bio, $user_id){
+            try{
+                $stmt = $this->conn->prepare("UPDATE user SET first_name = ?, last_name = ?, middle_initial = ?, gender = ?, birthday = ?, email = ?, username = ?, bio = ? WHERE user_id = ?");
+                $stmt->bind_param("ssssssssi", $firstname, $lastname, $middleinitial, $gender, $birthday, $email, $username, $bio, $user_id);
+                $stmt->execute();
+
+                if($stmt->affected_rows > 0)
+                    return 1;
+                else return 0;
+
+            } catch (Exception $e){
+                return NULL;
+            }
+        }
+
+        public function updatePassword($email, $old, $new, $confirm){
+            try{
+                if ($this->log_in($email, $old) == 0){
+                    return 1;
+                }else if ($this->verify_password($new, $confirm) == 0){
+                    return 2;
+                } else {
+                    $stmt = $this->conn->prepare("UPDATE user SET user_password = ? WHERE email = ?");
+                    $stmt->bind_param("ss", $new, $email);
+                    $stmt->execute();
+
+                    if($stmt->affected_rows > 0)
+                        return 0;
+                    else return false;
+                }
+            } catch (Exception $e){
+                return false;
+            }
         }
     }       
 ?>
